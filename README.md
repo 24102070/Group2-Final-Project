@@ -46,64 +46,43 @@ Once the import finishes, your local phpMyAdmin will have the same database stru
 
 ## 📝 How to Commit and Make a Pull Request
 
-When you're working on the project, you'll be making changes to the code. Instead of directly committing your changes to the main branch, you'll need to make a pull request. This is important to ensure that everyone reviews each other's work before it's added to the main project.
+### 1. Save Your Changes Locally
+- Open your project folder in **VS Code**.
+- Make the necessary changes to your code (e.g., modifying files, adding new ones).
 
-Here’s a step-by-step guide on how to do that:
+### 2. Stage Your Changes
+- In **VS Code**, open the **Source Control** panel by clicking on the Git icon in the sidebar on the left (it looks like a branch).
+- You'll see the files you modified listed under **Changes**.
+- Click the **+** icon next to each file you want to include in your commit, or click the **+** icon next to **Changes** to stage all modified files.
 
-### 1. Commit Changes Locally
-a. Open your terminal and go to the project folder:
+### 3. Commit Your Changes
+- Once your files are staged, enter a commit message in the **Message** box at the top of the Source Control panel.  
+  **Example:** `Fixed bug in event registration page`.
+- After writing your commit message, click the checkmark icon at the top of the Source Control panel to commit your changes.
 
-```bash
-cd path/to/your-project-folder
-```
+### 4. Push Your Changes to GitHub
+- Open the **Terminal** in VS Code by going to **Terminal > New Terminal** or using the shortcut `Ctrl + ` (backtick).
+- Make sure you're on the correct branch (use `main` unless told otherwise). Type the following in the terminal:
+  
+  ```bash
+  git checkout main
+  ```
 
-b. Make sure you're on the correct branch (use `main` for now unless told otherwise):
+- Push your changes to GitHub with:
 
-```bash
-git checkout main
-```
+  ```bash
+  git push origin main
+  ```
 
-c. Add any new or modified files to the staging area:
+### 5. Create a Pull Request
+- Open your repository on **GitHub** in your web browser.
+- You’ll see a banner that says, "Your branch is ahead of 'origin/main' by X commits" with a button to **Create Pull Request**.
+- Click **Compare & Pull Request**.
 
-```bash
-git add .
-```
-
-This will add all changed files to the next commit. If you only want to add specific files, replace the `.` with the file names.
-
-d. Commit your changes with a descriptive message:
-
-```bash
-git commit -m "Describe your changes here"
-```
-
-Make sure your commit message explains what you did.
-
-### 2. Push Your Changes to GitHub
-a. Push your changes to the remote repository (GitHub):
-
-```bash
-git push origin main
-```
-
-This will upload your changes to GitHub.
-
-### 3. Make a Pull Request (Important!)
-Instead of directly pushing changes to the main branch, it's important to create a pull request (PR). A PR allows other team members to review your changes before they are merged into the main project. Here's how to do it:
-
-a. Go to the GitHub Repository  
-Open the repository on GitHub in your web browser.  
-You’ll see a banner that says "Your branch is ahead of 'origin/main' by X commits" with a button to **Create Pull Request**.
-
-b. Create a Pull Request  
-Click on the "Compare & Pull Request" button.  
-Write a description of your changes in the pull request.  
-Make sure you choose the correct branch (usually `main`) for merging.  
-Click **Create Pull Request**.
-
-c. Wait for Review  
-Your teammates will review your changes and leave comments or approve the pull request.  
-Once the pull request is approved, it will be merged into the main branch by someone else (or you, depending on permissions).
+### 6. Complete the Pull Request
+- Add a description of your changes in the pull request.
+- Click **Create Pull Request**.
+- Wait for your teammates to review and approve your pull request. Once it's approved, it will be merged into the main branch.
 
 ---
 
