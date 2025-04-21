@@ -1,0 +1,72 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Buttons */
+button {
+    display: inline-block;
+    background: #4CAF50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+/* Forms */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    height: 80px;
+    resize: none;
+}
+
+/* Bookings */
+.booking {
+    background: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.booking p {
+    margin: 5px 0;
+}

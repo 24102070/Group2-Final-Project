@@ -1,0 +1,14 @@
+# Enable access to uploads directory
+<Directory "C:/xampp/htdocs/Event_Site_Draft/uploads">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+
+# Allow access to certain file types in uploads
+<FilesMatch "\.(pdf|doc|docx|jpg|jpeg|png)$">
+    Require all granted
+</FilesMatch>
+
+# Prevent directory listing unless files are requested directly
+Options -Indexes
