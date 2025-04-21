@@ -37,7 +37,7 @@ Now you need to import the database from the .sql file provided in the project:
 
 - Select the `event_planning` database from the list.
 - Go to the **Import** tab at the top of the page.
-- Under the **File to Import** section, click **Choose File** and select the file `Event_Site_Draft/database/event_site_db.sql` from your local folder.
+- Under the **File to Import** section, click **Choose File** and select the file `Event_Site_Draft/event_planning.sql` from your local folder.
 - Click **Go** to start importing the database.
 
 Once the import finishes, your local phpMyAdmin will have the same database structure and data as the one used in the project.
