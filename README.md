@@ -17,7 +17,7 @@ To get the database running on your local machine, follow these steps:
 Open your terminal (Command Prompt or Git Bash) and clone the repository by running this command:
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/24102070/Group2-Final-Project.git
 ```
 
 This will copy the entire project folder to your computer.
