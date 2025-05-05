@@ -44,45 +44,123 @@ Once the import finishes, your local phpMyAdmin will have the same database stru
 
 ---
 
-## 📝 How to Commit and Make a Pull Request
+# 🚀 Project Workflow: Save Changes, Commit Only What You Edited, and Make a Pull Request
 
-### 1. Save Your Changes Locally
+This guide explains how to properly work with Git in VS Code, ensuring you commit **only the files you changed** and submit your work via a pull request (PR) on GitHub.
+
+---
+
+## 📁 1. Save Your Changes Locally
+
 - Open your project folder in **VS Code**.
-- Make the necessary changes to your code (e.g., modifying files, adding new ones).
+- Make the necessary edits (e.g., fix bugs, update UI, add new features).
 
-### 2. Stage Your Changes
-- In **VS Code**, open the **Source Control** panel by clicking on the Git icon in the sidebar on the left (it looks like a branch).
-- You'll see the files you modified listed under **Changes**.
-- Click the **+** icon next to each file you want to include in your commit, or click the **+** icon next to **Changes** to stage all modified files.
+---
 
-### 3. Commit Your Changes
-- Once your files are staged, enter a commit message in the **Message** box at the top of the Source Control panel.  
-  **Example:** `Fixed bug in event registration page`.
-- After writing your commit message, click the checkmark icon at the top of the Source Control panel to commit your changes.
+## 🌿 2. Create and Switch to a New Branch
 
-### 4. Push Your Changes to GitHub
-- Open the **Terminal** in VS Code by going to **Terminal > New Terminal** or using the shortcut `Ctrl + ` (backtick).
-- Make sure you're on the correct branch (use `main` unless told otherwise). Type the following in the terminal:
-  
-  ```bash
-  git checkout main
-  ```
+Create a new branch for your changes:
 
-- Push your changes to GitHub with:
+```bash
+git checkout -b your-branch-name
+```
 
-  ```bash
-  git push origin main
-  ```
+🔁 Replace `your-branch-name` with something like `fix-login`, `feature-dashboard`, etc.
 
-### 5. Create a Pull Request
-- Open your repository on **GitHub** in your web browser.
-- You’ll see a banner that says, "Your branch is ahead of 'origin/main' by X commits" with a button to **Create Pull Request**.
-- Click **Compare & Pull Request**.
+---
 
-### 6. Complete the Pull Request
-- Add a description of your changes in the pull request.
-- Click **Create Pull Request**.
-- Wait for your teammates to review and approve your pull request. Once it's approved, it will be merged into the main branch.
+## ✅ 3. Stage and Commit Only the Files You Changed
+
+### 3.1 Stage Your Changes
+
+#### Option A: Using VS Code
+- Click the **Source Control (Git)** icon on the sidebar.
+- Under **Changes**, click the **+** next to each of the files you edited.
+
+Example changed files:
+- `path/to/your-file1.ext`
+- `path/to/your-file2.ext`
+
+✅ Stage only the files you modified. Do **not** include unrelated files.
+
+#### Option B: Using Terminal (Better)
+
+```bash
+git add path/to/your-file1.ext
+git add path/to/your-file2.ext
+```
+
+---
+
+### 3.2 Commit Your Changes
+
+#### Option A: Using VS Code
+- Enter a descriptive message like:  
+  `Updated validation for login form`
+- Click the **✔** (checkmark) icon to commit.
+
+#### Option B: Using Terminal (Better)
+
+```bash
+git commit -m "your-commit-message"
+```
+
+📝 Replace `"your-commit-message"` with a short summary of your update, e.g., `"Fix typo on signup page"`.
+
+---
+
+## ⬆️ 4. Push Your Branch to GitHub
+
+Push your local branch to GitHub:
+
+```bash
+git push origin your-branch-name
+```
+
+Replace `your-branch-name` with the name you used in Step 2.
+
+---
+
+## 🔁 5. Create a Pull Request (PR)
+
+1. Go to your GitHub repository in a browser.
+2. You’ll see a banner:
+   ```
+   Your recently pushed branches: your-branch-name
+   ```
+   Click **Compare & Pull Request**.
+3. Add a title and description of what you changed.
+4. Click **Create Pull Request**.
+
+---
+
+## 👀 6. Review and Approval
+
+- Teammates or reviewers will check your PR.
+- Once approved, it will be merged into the `main` branch.
+
+---
+
+## 🎯 7. Final Steps
+
+After your pull request is merged:
+
+```bash
+git checkout main
+git pull origin main
+```
+
+You now have the latest version of the project!
+
+---
+
+## 📌 Tips
+
+- Create **one branch per task or feature**.
+- Only commit the files you edited.
+- Write clear commit messages.
+- Don’t commit directly to `main`.
+
 
 ---
 
