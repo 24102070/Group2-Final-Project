@@ -1,0 +1,197 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f6f4f3, #ffffff);
+    color: #333;
+    padding: 40px;
+    line-height: 1.6;
+    background-attachment: fixed;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('../images/weddingadmin.jfif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.07;
+    z-index: -1;
+}
+
+:root {
+    --primary: #e4816c;
+    --secondary: #f6f4f3;
+    --text-dark: #2c2c2c;
+    --text-light: #fff;
+}
+
+h1 {
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 700;
+    color: #fff; /* white */
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* stronger shadow */
+    text-transform: uppercase; /* all caps */
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #f6f4f3, #f6f4f3 50%, #fff 100%);
+    margin: 0;
+    padding: 0;
+    color: var(--text-dark);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: var(--secondary);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+}
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table thead {
+    background-color: var(--primary);
+    color: white;
+}
+
+table th, table td {
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+table tr:hover {
+    background-color: #f0f0f0;
+}
+
+.btn {
+    padding: 8px 14px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom:15px;
+}
+
+.btn-accept {
+    background-color: #2ecc71;
+    color: var(--text-light);
+}
+
+.btn-accept:hover {
+    background-color: #27ae60;
+}
+
+.btn-reject {
+    background-color: #e74c3c;
+    color: var(--text-light);
+}
+
+.btn-reject:hover {
+    background-color: #c0392b;
+}
+
+.btn i {
+    font-size: 14px;
+}
+
+button {
+    margin: 20px auto;
+    display: block;
+    padding: 10px 16px;
+    font-weight: 600;
+    background-color: var(--primary);
+    color: var(--text-light);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d56e59;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    table th, table td {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    table thead {
+        display: none;
+    }
+
+    table, table tbody, table tr, table td {
+        display: block;
+        width: 100%;
+    }
+
+    table tr {
+        margin-bottom: 15px;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-right: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .btn {
+        margin-top: 8px;
+    }
+}

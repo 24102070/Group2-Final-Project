@@ -52,101 +52,16 @@ $result = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Bookings</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Global Styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-
-        .container {
-            width: 80%;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-
-        /* Table Styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table th, table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        table th {
-            background-color: #3498db;
-            color: white;
-        }
-
-        table tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        /* Button Styles */
-        .btn {
-            padding: 8px 12px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            display: inline-block;
-        }
-
-        .btn-accept {
-            background-color: #2ecc71;
-            color: white;
-            margin-right: 10px;
-        }
-
-        .btn-accept:hover {
-            background-color: #27ae60;
-        }
-
-        .btn-reject {
-            background-color: #e74c3c;
-            color: white;
-        }
-
-        .btn-reject:hover {
-            background-color: #c0392b;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .container {
-                width: 90%;
-            }
-
-            table th, table td {
-                font-size: 14px;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-        }
-    </style>
+   
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/manage_booking.css">
+   
 </head>
 <body>
     <div class="container">
-        <h1>Manage Bookings</h1>
+        <h1>MANAGE BOOKINGS</h1>
         <table>
             <thead>
                 <tr>
@@ -172,16 +87,16 @@ $result = $stmt->get_result();
                     $formatted_end_time = $end_time->format('g:i A');
                     ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($row['user_name']); ?></td>
-                        <td><?php echo htmlspecialchars($row['user_email']); ?></td>
-                        <td><?php echo htmlspecialchars($row['user_contact_number']); ?></td>
-                        <td><?php echo htmlspecialchars($row['package_name'] ? $row['package_name'] : 'No Package'); ?></td>
-                        <td><?php echo $formatted_schedule . ' ' . $formatted_start_time . ' - ' . $formatted_end_time; ?></td>
-                        <td><?php echo ucfirst(htmlspecialchars($row['status'])); ?></td>
+                        <td data-label="User Name"><?php echo htmlspecialchars($row['user_name']); ?></td>
+                        <td data-label="User Email"><?php echo htmlspecialchars($row['user_email']); ?></td>
+                        <td data-label="User Contact #"><?php echo htmlspecialchars($row['user_contact_number']); ?></td>
+                        <td data-label="Package Name"><?php echo htmlspecialchars($row['package_name'] ? $row['package_name'] : 'No Package'); ?></td>
+                        <td data-label="Start-End TIme"><?php echo $formatted_schedule . ' ' . $formatted_start_time . ' - ' . $formatted_end_time; ?></td>
+                        <td data-label="Status"><?php echo ucfirst(htmlspecialchars($row['status'])); ?></td>
                         <td>
                             <?php if ($row['status'] == 'pending'): ?>
-                                <a href="?action=accept&booking_id=<?php echo $row['id']; ?>" class="btn btn-accept">Accept</a> 
-                                <a href="?action=reject&booking_id=<?php echo $row['id']; ?>" class="btn btn-reject">Reject</a>
+                                <a href="?action=accept&booking_id=<?php echo $row['id']; ?>" class="btn btn-accept">  <i class="fas fa-check-circle"></i>Accept</a> 
+                                <a href="?action=reject&booking_id=<?php echo $row['id']; ?>" class="btn btn-reject"> <i class="fas fa-times-circle"></i>Reject</a>
                             <?php else: ?>
                                 No Action
                             <?php endif; ?>

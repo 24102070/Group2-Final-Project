@@ -49,84 +49,11 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Freelancer Bookings</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 80%;
-            margin: 50px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-        }
-
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-
-        table th, table td {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
-
-        table th {
-            background-color: #3498db;
-            color: white;
-        }
-
-        .btn {
-            padding: 8px 12px;
-            border-radius: 4px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-        }
-
-        .btn-accept {
-            background-color: #2ecc71;
-        }
-
-        .btn-reject {
-            background-color: #e74c3c;
-        }
-
-        .btn-accept:hover {
-            background-color: #27ae60;
-        }
-
-        .btn-reject:hover {
-            background-color: #c0392b;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                width: 90%;
-            }
-
-            table th, table td {
-                font-size: 14px;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/manage_booking.css">
+    
 </head>
 <body>
     <div class="container">
@@ -151,16 +78,16 @@ $result = $stmt->get_result();
                     $end = new DateTime($row['end_time']);
                     ?>
                     <tr>
-                        <td><?= htmlspecialchars($row['user_name']) ?></td>
-                        <td><?= htmlspecialchars($row['user_email']) ?></td>
-                        <td><?= htmlspecialchars($row['user_contact_number']) ?></td>
-                        <td><?= htmlspecialchars($row['package_name'] ?? 'No Package') ?></td>
-                        <td><?= $date->format('F j, Y') . ' ' . $start->format('g:i A') . ' - ' . $end->format('g:i A') ?></td>
-                        <td><?= ucfirst($row['status']) ?></td>
+                        <td data-label="User Name"><?= htmlspecialchars($row['user_name']) ?></td>
+                        <td data-label="User Email"><?= htmlspecialchars($row['user_email']) ?></td>
+                        <td data-label="User Contact #"><?= htmlspecialchars($row['user_contact_number']) ?></td>
+                        <td data-label="Package Name"><?= htmlspecialchars($row['package_name'] ?? 'No Package') ?></td>
+                        <td data-label="Schedule"><?= $date->format('F j, Y') . ' ' . $start->format('g:i A') . ' - ' . $end->format('g:i A') ?></td>
+                        <td data-label="Status"><?= ucfirst($row['status']) ?></td>
                         <td>
                             <?php if ($row['status'] === 'pending'): ?>
-                                <a href="?action=accept&booking_id=<?= $row['id'] ?>" class="btn btn-accept">Accept</a>
-                                <a href="?action=reject&booking_id=<?= $row['id'] ?>" class="btn btn-reject">Reject</a>
+                                <a href="?action=accept&booking_id=<?= $row['id'] ?>" class="btn btn-accept"> <i class="fas fa-check-circle"></i>Accept</a>
+                                <a href="?action=reject&booking_id=<?= $row['id'] ?>" class="btn btn-reject"> <i class="fas fa-times-circle"></i>Reject</a>
                             <?php else: ?>
                                 No Action
                             <?php endif; ?>

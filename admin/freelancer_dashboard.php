@@ -63,114 +63,10 @@ $cover_photo = !empty($freelancer['cover_photo']) ? "../" . $freelancer['cover_p
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Freelancer Dashboard</title>
-    <link rel="stylesheet" href="../assets/styles.css">
-    <style>
-        .cover-photo {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .profile-container {
-            display: flex;
-            justify-content: center;
-            margin-top: -50px;
-        }
-
-        .profile-photo {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .package-card {
-            background: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .package-title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .package-details, .package-price {
-            font-size: 16px;
-        }
-
-        .package-image {
-            width: 100%;
-            max-height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .btn-view {
-            text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .btn-view:hover {
-            text-decoration: underline;
-        }
-
-        .review-container {
-    margin-top: 15px;
-}
-
-.review-card {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-left: 5px solid #007bff;
-    border-radius: 8px;
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease;
-}
-
-.review-card:hover {
-    transform: scale(1.01);
-}
-
-.reviewer-name {
-    font-weight: 600;
-    font-size: 16px;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.review-rating {
-    color: #ffaa00;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.review-text {
-    font-size: 14px;
-    color: #555;
-    white-space: pre-wrap;
-}
-
-.btn-view-more {
-    background-color: transparent;
-    border: none;
-    color: #007bff;
-    font-size: 14px;
-    cursor: pointer;
-    text-decoration: underline;
-    margin-top: 5px;
-    padding: 0;
-}
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/dashStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
 </head>
 <body>
 
@@ -178,13 +74,13 @@ $cover_photo = !empty($freelancer['cover_photo']) ? "../" . $freelancer['cover_p
     <h1>Welcome, <?php echo htmlspecialchars($freelancer['name']); ?>!</h1>
     <p>Manage your gigs and update your profile.</p>
 
-    <a href="manage_freelancer_bookings.php">Manage Bookings</a> |
-    <a href="manage_freelancer_schedules.php">Manage Schedules</a> |
-    <a href="update_freelancer_profile.php">Update Profile</a> |
-    <a href="add_package_freelancer.php">Add Package</a> |
-    <a href="create_freelancer_post.php">Create Post</a> |
-    <a href="browse_companies.php">Connect and Browse</a> |
-    <a href="../auth/logout.php">Logout</a>
+    <a href="manage_freelancer_bookings.php"><i class="fas fa-calendar-check"></i>Manage Bookings</a> |
+    <a href="manage_freelancer_schedules.php"><i class="fas fa-clock"></i>Manage Schedules</a> |
+    <a href="update_freelancer_profile.php"><i class="fa-solid fa-user-pen"></i> Update Profile</a> |
+    <a href="add_package_freelancer.php"><i class="fa-solid fa-box-open"></i>Add Package</a> |
+    <a href="create_freelancer_post.php"><i class="fa-solid fa-pen-to-square"></i>Create Post</a> |
+    <a href="browse_companies.php"><i class="fa-solid fa-right-from-bracket"></i>Connect and Browse</a> |
+    <a href="../auth/logout.php"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
 </div>
 
 <hr>
@@ -195,17 +91,20 @@ $cover_photo = !empty($freelancer['cover_photo']) ? "../" . $freelancer['cover_p
 </div>
 
 <!-- Profile Photo -->
-<div class="profile-container">
+<div class="profile-section">
     <img src="<?php echo $profile_photo; ?>" class="profile-photo">
+    <div class="profile-details">
+    <h2><?php echo htmlspecialchars($freelancer['name']); ?></h2>
+    <p><?php echo htmlspecialchars($freelancer['contact']); ?></p>
+    <p><strong>Minimum Fee:</strong> PHP <?php echo number_format($freelancer['minimum_fee'], 2); ?></p>
+    </div>
 </div>
 
 <!-- Freelancer Details -->
-<div class="container">
-    <h2>Freelancer Profile</h2>
-    <p><strong>Name:</strong> <?php echo htmlspecialchars($freelancer['name']); ?></p>
-    <p><strong>About Me:</strong> <?php echo nl2br(htmlspecialchars($freelancer['about'])); ?></p>
-    <p><strong>Contact:</strong> <?php echo htmlspecialchars($freelancer['contact']); ?></p>
-    <p><strong>Minimum Fee:</strong> PHP <?php echo number_format($freelancer['minimum_fee'], 2); ?></p>
+<div class="profile-details">
+   
+    <p style = "max-width: 50%; text-align: justify; margin-left: 12%;"><?php echo nl2br(htmlspecialchars($freelancer['about'])); ?></p>
+    </div>
 </div>
 
 <!-- Packages -->
