@@ -1,0 +1,389 @@
+
+/* Global Styling */
+body {
+    font-family: 'Poppins', serif;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+    color: #5A4A42;
+    line-height: 1.6;
+    background: url('https://images.unsplash.com/photo-1589243853654-393fcf7c870b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: 200% 200%;
+    animation: gradient 55s ease infinite;
+    min-height: 100vh;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(255, 173, 153, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    overflow: hidden;
+}
+
+/* Cloudy effect */
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="cloudy-effect"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="5" /><feDisplacementMap in="SourceGraphic" scale="10" /></filter><rect width="100" height="100" filter="url(%23cloudy-effect)" opacity="0.15" fill="white"/></svg>');
+    opacity: 0.4;
+    z-index: -1;
+}
+
+h1, h2 {
+    font-family: 'Playfair Display', serif;
+    color: #E67B7B;
+    font-weight: 400;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+h1 {
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+h1:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #E67B7B, transparent);
+}
+
+h2 {
+    font-size: 2em;
+    margin: 30px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(230, 123, 123, 0.3);
+}
+
+/* Hero Section */
+.hero-section {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+ /* Cover and Profile Photos */
+ .cover-photo {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    margin: -80px 0 30px 12%;
+    position: relative;
+    z-index: 1;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.profile-details {
+    margin-left: 30px;
+}
+
+.profile-details h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.profile-details p {
+    margin: 5px 0;
+    color: #666;
+}
+
+/* Navigation Links */
+.container a {
+    text-decoration: none;
+    background-color: rgba(230, 123, 123, 0.9);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 30px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    font-weight: 300;
+    margin: 5px;
+    font-family: 'Poppins', serif;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 2px 8px rgba(230, 123, 123, 0.2);
+    font-size: 0.9rem;
+}
+
+.container a:hover {
+    background-color: rgba(212, 106, 106, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(230, 123, 123, 0.3);
+}
+
+.container a i {
+    margin-right: 8px;
+}
+
+/* Packages and Posts Grid */
+.packages-grid, .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+/* Card Styles */
+.package-card {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(255, 183, 161, 0.1);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+}
+
+.package-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 24px rgba(255, 183, 161, 0.2);
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.package-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: transform 0.4s ease;
+}
+
+.package-card:hover .package-image {
+    transform: scale(1.03);
+}
+
+.package-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #E67B7B;
+    margin: 10px 0;
+    font-weight: 400;
+}
+
+.package-card p {
+    color: #7A6A65;
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.package-card strong {
+    color: #E67B7B;
+    font-weight: 400;
+}
+
+/* Review Styles */
+.review-container {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed rgba(230, 123, 123, 0.3);
+}
+
+.review-container h4 {
+    font-family: 'Poppins', serif;
+    color: #E67B7B;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.review-card {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 3px solid #E67B7B;
+}
+
+.reviewer-name {
+    font-weight: 500;
+    color: #E67B7B;
+    margin-bottom: 5px;
+}
+
+/* Button Styles */
+.btn-view, .btn-view-more {
+    text-decoration: none;
+    background-color: rgba(230, 123, 123, 0.9);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 30px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    font-weight: 300;
+    border: none;
+    text-align: center;
+    font-family: 'Poppins', serif;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 2px 8px rgba(230, 123, 123, 0.2);
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.btn-view-more {
+    background-color: rgba(150, 123, 123, 0.9);
+}
+
+.btn-view:hover, .btn-view-more:hover {
+    background-color: rgba(212, 106, 106, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(230, 123, 123, 0.3);
+}
+
+/* No Content Messages */
+.no-content {
+    text-align: center;
+    color: #7A6A65;
+    font-size: 1.1rem;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    grid-column: 1 / -1;
+}
+
+.no-content i {
+    font-size: 2rem;
+    color: #E67B7B;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* Decorative elements */
+.peach-blob {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255,183,161,0.3) 0%, rgba(255,183,161,0) 70%);
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(20px);
+}
+
+.peach-blob-1 {
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+}
+
+.peach-blob-2 {
+    bottom: -150px;
+    left: -150px;
+    width: 500px;
+    height: 500px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    .profile-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-photo {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .packages-grid, .posts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .container a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+    }
+}
+
+.post-caption-container {
+margin: 15px 0;
+}
+
+.post-caption-short, .post-caption-full {
+margin-bottom: 10px;
+word-wrap: break-word;
+}
+
+.btn-toggle-caption {
+background: none;
+border: none;
+color: #E67B7B;
+cursor: pointer;
+padding: 5px 0;
+font-size: 0.9em;
+text-decoration: underline;
+}
+
+.btn-toggle-caption:hover {
+color: #d46a6a;
+}

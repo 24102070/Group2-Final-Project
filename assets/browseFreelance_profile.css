@@ -1,0 +1,218 @@
+
+/* Post Section */
+.post-container {
+    margin-top: 20px;
+}
+
+.post {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.post-caption {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.post-media {
+    margin-top: 10px;
+}
+
+.post-media img, .post-media video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.post p small {
+    font-size: 12px;
+    color: #777;
+}
+
+/* Existing Styles */
+.cover-photo {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    margin-top: -50px;
+}
+
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.package-card {
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.package-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.package-details, .package-price {
+    font-size: 16px;
+}
+
+.btn-book {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-book:hover {
+    background-color: #0056b3;
+}
+
+.package-image {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.back-btn {
+    display: inline-block;
+    margin: 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+.package-card {
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 8px;
+    width: 250px;
+    height: 200px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.package-card:hover {
+    height: auto;
+    width: 100%;
+    padding: 20px;
+    z-index: 2;
+}
+
+.package-title,
+.package-price {
+    font-size: 18px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.package-details,
+.package-price,
+.package-card p {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    height: 0;
+    overflow: hidden;
+}
+
+.package-card:hover .package-details,
+.package-card:hover .package-price,
+.package-card:hover p {
+    opacity: 1;
+    height: auto;
+    margin-top: 10px;
+}
+
+.package-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.review-section {
+    margin-top: 20px;
+}
+
+.review-section h3 {
+    font-size: 24px;
+}
+
+.review-container {
+    margin-top: 10px;
+    background: #f1f1f1;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.review {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.rating {
+    font-size: 18px;
+    color: #ffcc00;
+}
+
+.star-rating {
+    direction: rtl;
+    font-size: 30px;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    color: #ddd;
+    cursor: pointer;
+}
+
+.star-rating input:checked ~ label {
+    color: #ffcc00;
+}
+
+.star-rating input:hover ~ label {
+    color: #ffcc00;
+}
+
+.review-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.review-btn:hover {
+    background-color: #0056b3;
+}

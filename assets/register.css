@@ -1,0 +1,109 @@
+
+body {
+ background: url('../assets/IMAGES/LOG_BG.png') no-repeat center center fixed;
+ background-size: cover;
+ height: 100vh;
+ margin: 0;
+ font-family: 'Poppins', sans-serif;
+}
+* {
+ font-family: 'Poppins', sans-serif;
+}
+     .error {
+         background-color: #ffdddd;
+         color: #d8000c;
+         padding: 10px;
+         margin-bottom: 15px;
+         border-radius: 5px;
+         text-align: center;
+         font-size: 14px;
+     }
+
+     .password-container {
+         position: relative;
+         width: 100%;
+     }
+
+     .register-container {
+ margin: 50px auto; /* Top and bottom margin, centering horizontally */
+ background-color: rgba(255, 255, 255, 0.9);
+ padding: 30px;
+ border-radius: 15px;
+ box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+ width: 90%;
+ max-width: 400px; /* Limiting the width */
+ text-align: center;
+ position: absolute;
+ top: 50%; /* Vertically centering */
+ left: 0; /* Aligning to the left of the page */
+ transform: translateY(-50%); /* Centering vertically */
+}
+
+.register-container h2,
+.register-container select,
+.register-container form {
+ width: 100%;
+}
+     .password-container input[type="password"],
+     .password-container input[type="text"] {
+         width: 90%;
+         padding-right: 30px;
+     }
+
+     .toggle-password {
+         position: absolute;
+         margin-left: 70px;
+         top: 40%;
+         transform: translateY(-50%);
+         cursor: pointer;
+     }
+
+     button {
+ background-color: #ffcc99; /* Peach color */
+ color: white; /* Text color */
+ border: none;
+ padding: 10px 20px;
+ border-radius: 5px;
+ cursor: pointer;
+ font-size: 16px;
+ transition: background-color 0.3s ease;
+}
+
+button:hover {
+ background-color: #ffb380; /* Slightly darker peach color on hover */
+}
+
+.login-symbol {
+ text-align: center;
+ margin-bottom: -50px; /* Adjust the space between the symbol and the login text */
+}
+
+.register-container {
+ position: absolute;
+ top: 50%;       /* Center vertically */
+ left: 5%;       /* Move to the left side, with margin */
+ transform: translateY(-50%);
+ background-color: rgba(255, 255, 255, 0.9);
+ padding: 30px;
+ border-radius: 15px;
+ box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+ width: 90%;
+ max-width: 400px;
+ text-align: center;
+ margin: 0 30px;  /* Horizontal margin to add spacing from viewport edges */
+}
+
+.register-container img {
+ width: 250px;
+ height: 100px;
+ margin-bottom: 15px;
+}
+
+.register-container h2 {
+ margin-top: 0;
+ margin-bottom: 10px;
+}
+
+form {
+ width: 100%;
+}

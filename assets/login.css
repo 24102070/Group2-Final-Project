@@ -1,0 +1,107 @@
+
+/* Add the background image */
+body {
+background: url('../assets/IMAGES/LOG_BG.png') no-repeat center center fixed; /* Path to your image */
+background-size: cover;
+height: 100vh;
+margin: 0;
+font-family: 'Poppins', sans-serif;
+}
+
+/* Center the login container to the left */
+.login-container {
+position: absolute;
+left: 10%; /* 10% from the left edge */
+top: 50%;
+transform: translateY(-50%);
+max-width: 400px;
+padding: 20px;
+background: #fff;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+border-radius: 8px;
+text-align: center;
+}
+
+
+/* Styling the error box */
+.error-box {
+background-color: #ffdddd;
+color: #d8000c;
+padding: 10px;
+margin-bottom: 15px;
+border-radius: 5px;
+text-align: center;
+font-size: 14px;
+}
+
+/* Styling the login input fields */
+.login-container input,
+.login-container button {
+width: 100%;
+padding: 12px;
+margin: 8px 0;
+border: none; /* Removed border */
+border-radius: 15px;
+font-size: 16px;
+background-color: #f0f0f0;
+color: #333;
+box-sizing: border-box;
+}
+
+
+.password-container {
+display: flex;
+align-items: center;
+width: 100%;
+position: relative;
+}
+.login-container input:focus {
+outline: none;
+border-color: #28a745; /* Green border on focus */
+background-color: #fff; /* White background when focused */
+}
+.password-container input[type="password"],
+.password-container input[type="text"] {
+flex: 1;
+padding: 12px;
+border: none;
+border-radius: 15px;
+background-color: #f0f0f0;
+}
+/* Toggle password visibility */
+.toggle-password {
+position: absolute;
+right: -120px;
+top: 40%;
+transform: translateY(-50%);
+cursor: pointer;
+}
+
+/* Styling the login button */
+.login-container button {
+background-color: #ffb090fC;
+
+color: white;
+border: none;
+border-radius: 15px; /* Rounded corners */
+cursor: pointer;
+padding: 12px;
+font-size: 16px;
+}
+
+.login-container button:hover {
+background-color: #FFB07C;
+
+}
+
+/* Add style for the symbol above the login text */
+.login-symbol {
+text-align: center;
+margin-bottom: -50px; /* Adjust the space between the symbol and the login text */
+}
+
+.login-symbol img {
+width: 50px; /* Adjust the size of the symbol */
+height: 50px; /* Adjust the size of the symbol */
+display: inline-block;
+}
