@@ -1,16 +1,8 @@
 <?php
-include '../config/db.php';
+include 'config/db.php';
 ?>
 
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    
-} else {
-    // Handle any other HTTP method
-    http_response_code(405);  // Method Not Allowed
-    echo json_encode(["error" => "Method Not Allowed"]);
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,19 +17,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="../assets/hompage.css" />
-  <link rel="stylesheet" href="../assets/styles.css" />
+  <link rel="stylesheet" href="assets/hompage.css" />
+  <link rel="stylesheet" href="assets/styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="stylesheet" href="../assets/style.css" />
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
 
 <!-- NAVIGATION -->
 <nav class="navbar">
   <div class="nav-left">
-    <img src="../assets/IMAGES/logo.png" alt="Logo" class="nav-logo-img">
+    <img src="assets/IMAGES/logo.png" alt="Logo" class="nav-logo-img">
     <div class="nav-logo-text">
       <span class="logo-line1">EVE</span>
       <span class="logo-line2">Events, Venue, Experience</span>
@@ -62,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     </div>
     <div class="login-container">
   
-      <a href="../auth/login.php" class="login-btn">Log In</a>
+      <a href="auth/login.php" class="login-btn">Log In</a>
     </div>
   </div>
 </nav>
@@ -88,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       </p>
     </div>
 
-    <img src="../assets/IMAGES/hero_middle.png" alt="Hero Image" class="hero-image" />
+    <img src="assets/IMAGES/hero_middle.png" alt="Hero Image" class="hero-image" />
 
     <div class="hero-right">
       <p class="hero-text">
@@ -106,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <!-- STATS SECTION -->
 <section class="stats-section">
   <div class="stats-box">
-    <img src="../assets/IMAGES/HERO-STATS.png" alt="Statistics background">
+    <img src="assets/IMAGES/HERO-STATS.png" alt="Statistics background">
     <div class="stats-content">
       <div class="stats-text">
         <div class="stats-number">1,000+</div>
@@ -125,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </section>
 
 <!-- SLIDER -->
-<iframe src="../assets/slider.html" width="76%" height="500" style="border: none; background: transparent; border-radius: 1rem; margin: 0 auto; display: block;"></iframe>
+<iframe src="assets/slider.html" width="76%" height="500" style="border: none; background: transparent; border-radius: 1rem; margin: 0 auto; display: block;"></iframe>
 
 <!-- COLLABORATORS SECTION -->
 <!-- COLLABORATORS & FEATURED SECTION -->
@@ -145,21 +137,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <h3>Featured Companies & Freelancers</h3>
     <div class="grid">
       <div class="card">
-        <img src="../assets/IMAGES/dreamevents.jpg" alt="DreamEvents PH" class="card-img" />
+        <img src="assets/IMAGES/dreamevents.jpg" alt="DreamEvents PH" class="card-img" />
         <h3>DreamEvents PH</h3>
         <p>Luxury weddings and corporate gatherings. Flawless execution.</p>
         <p>💰 Min Fee: PHP 50,000</p>
         <a href="#" class="card-btn">View More</a>
       </div>
       <div class="card">
-        <img src="../assets/IMAGES/festivecreations.jpg" alt="Festive Creations" class="card-img" />
+        <img src="assets/IMAGES/festivecreations.jpg" alt="Festive Creations" class="card-img" />
         <h3>Festive Creations</h3>
         <p>Creative, budget-friendly events for every occasion.</p>
         <p>💰 Min Fee: PHP 30,000</p>
         <a href="#" class="card-btn">View More</a>
       </div>
       <div class="card">
-        <img src="../assets/IMAGES/markvillanueva.jfif" alt="Mark Villanueva" class="card-img" />
+        <img src="assets/IMAGES/markvillanueva.jfif" alt="Mark Villanueva" class="card-img" />
         <h3>Mark Villanueva (Photographer)</h3>
         <p>Capturing life’s best moments.</p>
         <p>💰 Min Fee: PHP 5,000</p>
