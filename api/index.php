@@ -1,6 +1,16 @@
 <?php
 include '../config/db.php';
 ?>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    
+} else {
+    // Handle any other HTTP method
+    http_response_code(405);  // Method Not Allowed
+    echo json_encode(["error" => "Method Not Allowed"]);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
