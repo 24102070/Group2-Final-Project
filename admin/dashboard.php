@@ -71,6 +71,7 @@ $cover_photo = !empty($company['cover_photo']) ? "../" . $company['cover_photo']
         <a href="add_package.php"><i class="fa-solid fa-box-open"></i>Add Package</a>
         <a href="create_post.php"><i class="fa-solid fa-pen-to-square"></i>Create Post</a>
         <a href="browse_freelancers.php"><i class="fa-solid fa-right-from-bracket"></i>Connect and Browse</a>
+         <a href="../messaging/messaging.php"><i class="fas fa-comment"></i>Messages</a>
         <a href="../auth/logout.php"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
     </div>
 </div>

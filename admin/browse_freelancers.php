@@ -109,7 +109,7 @@ sort($professions);
                                     <i class="fas fa-eye"></i> View
                                 </button>
                                 <button class="btn btn-primary" 
-                                        onclick="connectWithFreelancer(<?php echo $freelancer['id']; ?>)">
+                                        onclick="window.location.href = '../messaging/messaging.php';">
                                     <i class="fas fa-heart"></i> Connect
                                 </button>
                             </div>

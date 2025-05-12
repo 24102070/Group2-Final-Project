@@ -1,0 +1,125 @@
+.main-chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: white;
+  width: 100%;
+  max-height: 100%;
+}
+.container-icons button {
+  background-color: white;
+  border: 1px solid #ffffff;
+  border-radius: 20%;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+.container-icons button:hover {
+  background-color: rgb(236, 234, 234);
+}
+.chat-card {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff00;
+  border-radius: 10px;
+  flex-grow: 1;
+}
+.chat-content {
+  flex-grow: 1;
+}
+.status {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  margin-top: 5px;
+  color: #000000;
+  justify-content: space-between;
+}
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #00000055;
+  margin: 5px 0;
+}
+.time {
+  display: flex;
+  justify-content: center;
+  font-size: 8px;
+}
+.o-u-info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.profile-picture-display-message {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid #0aa32e;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.email {
+  margin-bottom: 10px;
+  font-size: 7px;
+  color: #353434b3;
+}
+.chats-bottom-container {
+  display: flex;
+  max-height: 85vh;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.messages-display {
+  padding: 1rem;
+  height: 100%;
+  overflow-y: auto;
+}
+.message-user-message {
+  border: 2px solid #0aa32e;
+  background-color: #3cd760a1;
+  max-width: max-content;
+  margin-left: auto;
+  border-radius: 10%;
+  padding: 5px;
+}
+.message-other-message {
+  border: 2px solid #000000;
+  background-color: #6b69695e;
+  max-width: max-content;
+  margin-right: auto;
+  border-radius: 10%;
+  padding: 5px;
+}
+.messages-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #000000;
+  border-radius: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  transition: shadow-box 0.2s ease;
+}
+.messages-input:hover {
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.messages-input input {
+  border: none;
+  flex: 1;
+  padding: 0.5rem;
+}
+.moreOption button {
+  background-color: white;
+  border: 1px solid #ffffff;
+  border-radius: 20%;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+.moreOption button:hover {
+  background-color: rgb(236, 234, 234);
+}

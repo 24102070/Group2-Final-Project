@@ -95,10 +95,12 @@ sort($statuses);
                         <button class="btn btn-view" onclick="window.location.href='browseCompany_profile.php?id=<?php echo $company['id']; ?>'">
                             <i class="fas fa-eye"></i> View Profile
                         </button>
-                        <button class="btn btn-connect" onclick="connectWithCompany(<?php echo $company['id']; ?>)">
+                        <button class="btn btn-connect" onclick= "window.location.href = '../messaging/messaging.php';">
                             <i class="fas fa-handshake"></i> Connect
                         </button>
                     </div>
+
+                     
                 </div>
             <?php endforeach; ?>
         </div>

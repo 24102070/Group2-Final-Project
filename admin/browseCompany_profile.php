@@ -88,7 +88,7 @@ $cover_photo = !empty($company['cover_photo']) ? "../" . $company['cover_photo']
             <p><strong>Contact:</strong> <?php echo htmlspecialchars($company['contact']); ?></p>
             <p><strong>Email:</strong> <?php echo htmlspecialchars($company['email']); ?></p>
             <p><strong>Minimum Fee:</strong> PHP <?php echo number_format($company['minimum_fee'], 2); ?></p>
-            <a href="../messages/new_message.php?company_id=<?php echo $company_id; ?>" class="btn btn-book">Contact Now</a>
+            <a href="../messaging/messaging.php"><i class="fas fa-comment"></i>Contact Now</a>
         </div>
 
         <!-- Packages -->

@@ -306,6 +306,7 @@ color: #d46a6a;
             <a href="add_package_freelancer.php"><i class="fa-solid fa-box-open"></i>Add Package</a>
             <a href="create_freelancer_post.php"><i class="fa-solid fa-pen-to-square"></i>Create Post</a>
             <a href="browse_companies.php"><i class="fa-solid fa-right-from-bracket"></i>Connect and Browse</a>
+          <a href="../messaging/messaging.php"><i class="fas fa-comment"></i>Messages</a>
             <a href="../auth/logout.php"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
         </div>
 

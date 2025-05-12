@@ -60,6 +60,10 @@ $user = $result->fetch_assoc();
                     <i class="fas fa-user-tie"></i> View Freelancers
                 </a>
             </li>
+
+            <li>
+                <a href="../messaging/messaging.php"><i class="fas fa-comment"></i>View Chats</a>
+            </li>
         
         <a class="logout" href="../auth/logout.php">
             <i class="fas fa-sign-out-alt"></i> Logout

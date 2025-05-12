@@ -289,7 +289,7 @@ $result_posts = $stmt_posts->get_result();
         <p><strong>Email:</strong> <?php echo htmlspecialchars($freelancer['email']); ?></p>
         <p><strong>Minimum Fee:</strong> PHP <?php echo number_format($freelancer['minimum_fee'], 2); ?></p>
         <!--For Messaging Feature (not final)-->
-        <a href="../booking/freelancer_book.php?freelancer_id=<?php echo $freelancer_id; ?>&package_id=<?php echo $package['id']; ?>" class="btn-book">Contact Now</a>
+        <a href="../messaging/messaging.php"><i class="fas fa-comment"></i>Contact Now</a>
     </div>
 
  
