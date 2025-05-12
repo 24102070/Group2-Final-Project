@@ -98,37 +98,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
     <link rel="stylesheet" href="../assets/styles.css">
-    <style>
-        .error {
-            background-color: #ffdddd;
-            color: #d8000c;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            text-align: center;
-            font-size: 14px;
-        }
+    <link rel="stylesheet" href="assets/hompage.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/register.css">
 
-        .password-container {
-            position: relative;
-            width: 100%;
-        }
-
-        .password-container input[type="password"],
-        .password-container input[type="text"] {
-            width: 90%;
-            padding-right: 30px;
-        }
-
-        .toggle-password {
-            position: absolute;
-            margin-left: 100px;
-            top: 40%;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
-    </style>
+  
     <script>
         function showForm(role) {
             document.getElementById('user-form').style.display = (role === 'user') ? 'block' : 'none';
@@ -141,11 +120,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             var field = document.getElementById(id);
             field.type = (field.type === "password") ? "text" : "password";
         }
+
     </script>
 </head>
 <body>
 
-    <h2>Register</h2>
+<div class="register-container">
+<img src="../assets/IMAGES/SYMBOL.png" alt="Logo" style="width: 250px; height: 100px;">
+    <h2>REGISTER</h2>
     <label>Select Role:</label>
     <select onchange="showForm(this.value)">
         <option value="">-- Select --</option>
@@ -168,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="email" name="email" placeholder="Email" required>
         <div class="password-container">
             <input type="password" id="password-user" name="password" placeholder="Password" required>
-            <input type="checkbox" class="toggle-password" onclick="togglePassword('password-user')" title="Show Password">
+            <i class="fa fa-eye toggle-password" onclick="togglePassword('password-user')"></i>
         </div>
         <input type="text" name="contact_number" placeholder="Contact Number" required>
         <label>Upload Valid ID:</label>
@@ -183,7 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="email" name="email" placeholder="Email" required>
         <div class="password-container">
             <input type="password" id="password-admin" name="password" placeholder="Password" required>
-            <input type="checkbox" class="toggle-password" onclick="togglePassword('password-admin')" title="Show Password">
+            <i class="fa fa-eye toggle-password" onclick="togglePassword('password-admin')"></i>
         </div>
         <button type="submit">Register</button>
     </form>
@@ -195,7 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="email" name="email" placeholder="Email" required>
         <div class="password-container">
             <input type="password" id="password-company" name="password" placeholder="Password" required>
-            <input type="checkbox" class="toggle-password" onclick="togglePassword('password-company')" title="Show Password">
+            <i class="fa fa-eye toggle-password" onclick="togglePassword('password-company')"></i>
         </div>
         <textarea name="description" placeholder="Business Description" required></textarea>
         <input type="number" name="minimum_fee" placeholder="Minimum Fee" required>
@@ -211,7 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="email" name="email" placeholder="Email" required>
         <div class="password-container">
             <input type="password" id="password-freelancer" name="password" placeholder="Password" required>
-            <input type="checkbox" class="toggle-password" onclick="togglePassword('password-freelancer')" title="Show Password">
+             <i class="fa fa-eye toggle-password" onclick="togglePassword('password-freelancer')"></i>
         </div>
         <input type="text" name="profession" placeholder="Profession" required>
         <textarea name="description" placeholder="Describe Your Services" required></textarea>

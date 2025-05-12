@@ -67,21 +67,247 @@ $cover_photo = !empty($freelancer['cover_photo']) ? "../" . $freelancer['cover_p
     <link rel="stylesheet" href="../assets/dashStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
+    <style>
+        .container a {
+    text-decoration: none;
+    background-color: rgba(230, 123, 123, 0.9);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 30px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    font-weight: 300;
+    margin: 5px;
+    font-family: 'Poppins', serif;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 2px 8px rgba(230, 123, 123, 0.2);
+    font-size: 0.9rem;
+}
+
+.container a:hover {
+    background-color: rgba(212, 106, 106, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(230, 123, 123, 0.3);
+}
+
+.container a i {
+    margin-right: 8px;
+}
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 20px;
+    align-items: start;
+}
+
+
+/* Packages and Posts Grid */
+.packages-grid, .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.package-card {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    font-size: 0.9rem; /* smaller text */
+    line-height: 1.3;
+}
+
+.package-card h3 {
+    font-size: 1rem;
+    margin: 8px 0;
+}
+
+.package-card p {
+    font-size: 0.85rem;
+    margin: 4px 0;
+}
+
+.package-image {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.review-container h4 {
+    font-size: 0.95rem;
+    margin: 10px 0 5px;
+}
+
+.reviewer-name {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.review-card p {
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+}
+
+.btn-view, .btn-view-more {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    margin-top: 6px;
+    display: inline-block;
+}
+
+.packages-section .packages-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+
+.btn-view:hover, .btn-view-more:hover {
+    background-color: rgba(212, 106, 106, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(230, 123, 123, 0.3);
+    color: white;
+}
+
+/* No Content Messages */
+.no-content {
+    text-align: center;
+    color: #7A6A65;
+    font-size: 1.1rem;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    grid-column: 1 / -1;
+}
+
+.no-content i {
+    font-size: 2rem;
+    color: #E67B7B;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* Decorative elements */
+.peach-blob {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255,183,161,0.3) 0%, rgba(255,183,161,0) 70%);
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(20px);
+}
+
+.peach-blob-1 {
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+}
+
+.peach-blob-2 {
+    bottom: -150px;
+    left: -150px;
+    width: 500px;
+    height: 500px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    .profile-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-photo {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .packages-grid, .posts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .container a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+    }
+}
+
+.post-caption-container {
+margin: 15px 0;
+}
+
+.post-caption-short, .post-caption-full {
+margin-bottom: 10px;
+word-wrap: break-word;
+}
+
+.btn-toggle-caption {
+background: none;
+border: none;
+color: #E67B7B;
+cursor: pointer;
+padding: 5px 0;
+font-size: 0.9em;
+text-decoration: underline;
+}
+
+.btn-toggle-caption:hover {
+color: #d46a6a;
+
+}
+
+
+    </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Welcome, <?php echo htmlspecialchars($freelancer['name']); ?>!</h1>
-    <p>Manage your gigs and update your profile.</p>
+ <div class="peach-blob peach-blob-1"></div>
+    <div class="peach-blob peach-blob-2"></div>
 
-    <a href="manage_freelancer_bookings.php"><i class="fas fa-calendar-check"></i>Manage Bookings</a> |
-    <a href="manage_freelancer_schedules.php"><i class="fas fa-clock"></i>Manage Schedules</a> |
-    <a href="update_freelancer_profile.php"><i class="fa-solid fa-user-pen"></i> Update Profile</a> |
-    <a href="add_package_freelancer.php"><i class="fa-solid fa-box-open"></i>Add Package</a> |
-    <a href="create_freelancer_post.php"><i class="fa-solid fa-pen-to-square"></i>Create Post</a> |
-    <a href="browse_companies.php"><i class="fa-solid fa-right-from-bracket"></i>Connect and Browse</a> |
-    <a href="../auth/logout.php"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
-</div>
+   <div class="container">
+    <h1 style="font-family: 'Playfair Display', serif; font-weight: 90; color: black; margin-bottom: 0;">
+        Welcome,
+    </h1>
+    <h2 style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 40px; font-weight: 110; color: salmon; margin-top: -10px;">
+        <?php echo htmlspecialchars($freelancer['name']); ?>
+    </h2>
+
+    <p>Manage your bookings and update your profile.</p>
+
+        <div class="dashboard-links">
+            <a href="manage_freelancer_bookings.php"><i class="fas fa-calendar-check"></i>Manage Bookings</a>
+            <a href="manage_freelancer_schedules.php"><i class="fas fa-clock"></i>Manage Schedules</a>
+            <a href="update_freelancer_profile.php"><i class="fa-solid fa-user-pen"></i> Update Profile</a>
+            <a href="add_package_freelancer.php"><i class="fa-solid fa-box-open"></i>Add Package</a>
+            <a href="create_freelancer_post.php"><i class="fa-solid fa-pen-to-square"></i>Create Post</a>
+            <a href="browse_companies.php"><i class="fa-solid fa-right-from-bracket"></i>Connect and Browse</a>
+            <a href="../auth/logout.php"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+        </div>
 
 <hr>
 

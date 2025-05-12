@@ -64,20 +64,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Post</title>
-    <link rel="stylesheet" href="../assets/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;300;400;500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/create_freelancer_post.css">
 </head>
 <body>
 
-<div class="container">
-    <h1>Create Post</h1>
-    <form method="POST" enctype="multipart/form-data">
-        <textarea name="caption" rows="4" required placeholder="Enter caption..."></textarea><br><br>
-        <input type="file" name="media" accept="image/*, video/*"><br><br>
-        <button type="submit">Create Post</button>
-    </form>
-</div>
+    <div class="peach-blob peach-blob-1"></div>
+    <div class="peach-blob peach-blob-2"></div>
+
+    <div class="overlay-container">
+        <h1>Create Post</h1>
+        
+        <form method="POST" enctype="multipart/form-data">
+            <textarea name="caption" required placeholder="Share your thoughts..."></textarea>
+            
+            <div class="file-input-container">
+                <label class="file-input-label">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>Click to upload media (images or videos)</span>
+                    <input type="file" name="media" accept="image/*, video/*">
+                </label>
+            </div>
+            
+            <button type="submit" class="btn btn-submit"><i class="fas fa-plus-circle"></i> Create Post</button>
+        </form>
+    </div>
 
 </body>
 </html>

@@ -17,7 +17,10 @@ $stmt->bind_param("i", $company_id);
 $stmt->execute();
 $result_packages = $stmt->get_result();
 
-// Check if there are any packages
+// Initialize the variable to avoid undefined warnings
+$no_packages_message = null;
+
+
 if ($result_packages->num_rows == 0) {
     $no_packages_message = "No packages available. Please add a package.";
 }
@@ -27,127 +30,64 @@ if ($result_packages->num_rows == 0) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>My Packages</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;300;400;500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Packages</title>
-    <link rel="stylesheet" href="../assets/styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
+    <link rel="stylesheet" href="../assets/view_packages.css">
 
-        .container {
-            width: 80%;
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        .package-card {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            padding: 20px;
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .package-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .package-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .package-details {
-            font-size: 16px;
-            color: #666;
-            margin: 10px 0;
-        }
-
-        .package-price {
-            font-size: 18px;
-            color: #5cb85c;
-            margin-bottom: 10px;
-        }
-
-        .package-image {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .btn-view {
-            display: inline-block;
-            text-decoration: none;
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-view:hover {
-            background-color: #0056b3;
-        }
-
-        .no-packages {
-            text-align: center;
-            font-size: 18px;
-            color: #999;
-        }
-    </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>My Packages</h1>
+    <div class="peach-blob peach-blob-1"></div>
+    <div class="peach-blob peach-blob-2"></div>
 
-    <?php if (isset($no_packages_message)): ?>
-        <p class="no-packages"><?php echo $no_packages_message; ?></p>
-        <a href="add_package.php" class="btn-view">Add New Package</a>
-    <?php else: ?>
-        <!-- Loop through each package and display its details -->
-        <?php while ($package = $result_packages->fetch_assoc()): ?>
-            <div class="package-card">
-                <h2><?php echo htmlspecialchars($package['name']); ?></h2>
-                <p><strong>Details:</strong> <?php echo nl2br(htmlspecialchars($package['details'])); ?></p>
-                <p><strong>Inclusions:</strong> <?php echo nl2br(htmlspecialchars($package['inclusions'])); ?></p>
-                <p class="package-price">PHP <?php echo number_format($package['price'], 2); ?></p>
+    <div class="overlay-container">
+        <div class="glass-header">
+            <h1><img src="../assets/IMAGES/LOGO.png" alt="Logo" class="logo"> My Packages</h1>
+        </div>
 
-                <?php if (!empty($package['image'])): ?>
-                    <img src="../<?php echo htmlspecialchars($package['image']); ?>" alt="Package Image" class="package-image">
-                <?php endif; ?>
+        <?php if ($no_packages_message): ?>
+            <p class="no-packages"><?php echo $no_packages_message; ?></p>
+            <a href="add_package.php" class="btn-add"><i class="fas fa-plus"></i> Add New Package</a>
+        <?php else: ?>
+            <?php while ($package = $result_packages->fetch_assoc()): ?>
+                <div class="package-card">
+                    <div class="package-title"><?php echo htmlspecialchars($package['name']); ?></div>
+                    <p class="package-details"><strong>Details:</strong> <?php echo nl2br(htmlspecialchars($package['details'])); ?></p>
+                    <p class="package-details"><strong>Inclusions:</strong> <?php echo nl2br(htmlspecialchars($package['inclusions'])); ?></p>
+                    <p class="package-price">₱ <?php echo number_format($package['price'], 2); ?></p>
 
-                <div class="buttons">
-                    <!-- Edit button -->
-                    <a href="edit_package.php?id=<?php echo $package['id']; ?>" class="btn-view">Edit</a>
+                    <?php if (!empty($package['image'])): ?>
+                        <img src="../<?php echo htmlspecialchars($package['image']); ?>" alt="Package Image" class="package-image">
+                    <?php endif; ?>
 
-                    <!-- Delete button -->
-                    <a href="delete_package.php?id=<?php echo $package['id']; ?>" class="delete" onclick="return confirm('Are you sure you want to delete this package?')">Delete</a>
+                    <div class="btn-group">
+                        <a href="edit_package.php?id=<?php echo $package['id']; ?>" class="btn btn-edit">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a href="delete_package.php?id=<?php echo $package['id']; ?>" class="btn btn-delete"
+                           onclick="return confirm('Are you sure you want to delete this package?')">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </a>
+                    </div>
                 </div>
-            </div>
-        <?php endwhile; ?>
-    <?php endif; ?>
-</div>
-<br><br>
-<a href="dashboard.php"><button>Back to Dashboard</button></a>
+            <?php endwhile; ?>
+        <?php endif; ?>
+
+        <div class="btn-back">
+            <a href="dashboard.php"><button><i class="fas fa-arrow-left"></i> Back to Dashboard</button></a>
+        </div>
+    </div>
+
+    <script>
+        // Add event listeners for each package title
+        document.querySelectorAll('.package-title').forEach(function(title) {
+            title.addEventListener('click', function() {
+                title.classList.toggle('expanded');
+            });
+        });
+    </script>
+
 </body>
 </html>

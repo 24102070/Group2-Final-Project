@@ -73,235 +73,202 @@ $result_posts = $stmt_posts->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($freelancer['name']); ?> - Details</title>
-    <link rel="stylesheet" href="../assets/styles.css">
-    <style>
-        /* Post Section */
-        .post-container {
-            margin-top: 20px;
-        }
 
-        .post {
-            background: #f9f9f9;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .post-caption {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .post-media {
-            margin-top: 10px;
-        }
-
-        .post-media img, .post-media video {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .post p small {
-            font-size: 12px;
-            color: #777;
-        }
-
-        /* Existing Styles */
-        .cover-photo {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .profile-container {
-            display: flex;
-            justify-content: center;
-            margin-top: -50px;
-        }
-
-        .profile-photo {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .package-card {
-            background: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .package-title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .package-details, .package-price {
-            font-size: 16px;
-        }
-
-        .btn-book {
-            display: inline-block;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .btn-book:hover {
-            background-color: #0056b3;
-        }
-
-        .package-image {
-            width: 100%;
-            max-height: 250px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .back-btn {
-            display: inline-block;
-            margin: 20px;
-            text-decoration: none;
-            color: #333;
-        }
-
-        .package-card {
-            background: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 8px;
-            width: 250px;
-            height: 200px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .package-card:hover {
-            height: auto;
-            width: 100%;
-            padding: 20px;
-            z-index: 2;
-        }
-
-        .package-title,
-        .package-price {
-            font-size: 18px;
-            font-weight: bold;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .package-details,
-        .package-price,
-        .package-card p {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            height: 0;
-            overflow: hidden;
-        }
-
-        .package-card:hover .package-details,
-        .package-card:hover .package-price,
-        .package-card:hover p {
-            opacity: 1;
-            height: auto;
-            margin-top: 10px;
-        }
-
-        .package-image {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .review-section {
-            margin-top: 20px;
-        }
-
-        .review-section h3 {
-            font-size: 24px;
-        }
-
-        .review-container {
-            margin-top: 10px;
-            background: #f1f1f1;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .review {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .rating {
-            font-size: 18px;
-            color: #ffcc00;
-        }
-
-        .star-rating {
-            direction: rtl;
-            font-size: 30px;
-        }
-
-        .star-rating input {
-            display: none;
-        }
-
-        .star-rating label {
-            color: #ddd;
-            cursor: pointer;
-        }
-
-        .star-rating input:checked ~ label {
-            color: #ffcc00;
-        }
-
-        .star-rating input:hover ~ label {
-            color: #ffcc00;
-        }
-
-        .review-btn {
-            background-color: #007bff;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .review-btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    
 </head>
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: #5A4A42;
+    line-height: 1.6;
+    background: url('https://images.unsplash.com/photo-1676734628558-624737d3e094?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.overlay-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Cover & Profile */
+.cover-photo {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.profile-container {
+    display: flex;
+    justify-content: center;
+    margin-top: -60px;
+}
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid white;
+    object-fit: cover;
+}
+
+/* Headings */
+.container h2 {
+    color: #e88b5f;
+    margin: 20px 0 10px;
+}
+
+/* --- CARD GRID --- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* --- PACKAGE AND POST CARD STYLES --- */
+.package-card, .post {
+    border: 1px solid #eee;
+    background: #fffdfa;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(240, 197, 168, 0.15);
+    transition: all 0.3s ease-in-out;
+    transform: scale(1);
+    max-height: 320px;
+    max-width: 280px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hover effect for the cards */
+.package-card:hover, .post:hover {
+    transform: scale(1.05);
+    max-height: none;
+    z-index: 10;
+}
+
+/* --- CARD IMAGE --- */
+.package-image, .post-media img, .post-media video {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+/* --- CARD CONTENT --- */
+.package-title, .post-caption {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #d17250;
+    padding: 10px 15px 0;
+}
+
+/* Package and Post Details */
+.package-details, .package-price {
+    font-size: 0.9rem;
+    padding: 0 15px 10px;
+}
+
+.package-price {
+    font-weight: 600;
+    color: #2d6a4f;
+}
+
+/* --- RATING INFO --- */
+.package-rating {
+    font-size: 0.8rem;
+    color: #6c757d;
+    padding: 5px 15px;
+}
+
+/* --- BUTTON --- */
+.btn-book {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 15px;
+    font-size: 0.9rem;
+    background-color: #f28c63;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+.btn-book:hover {
+    background-color: #d8754e;
+}
+
+/* --- RESPONSIVE STYLES --- */
+@media (max-width: 768px) {
+    /* Adjust grid layout */
+    .card-grid {
+        padding: 10px;
+    }
+
+    /* Adjust card sizes and padding */
+    .package-card, .post {
+        max-height: none;
+        padding: 10px;
+    }
+
+    /* Adjust image size for mobile */
+    .package-image {
+        height: 140px;
+    }
+
+    /* Adjust text size for mobile */
+    .package-title, .post-caption {
+        font-size: 1rem;
+    }
+
+    .package-price {
+        font-size: 1rem;
+    }
+}
+.back-btn {
+            display: inline-block;
+    margin-top: 2rem;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 500;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+    background: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius);
+    border: 2px solid var(--primary);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+     display: block;
+            text-align: center;
+            margin: 30px auto;
+            color: #E67B7B;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+</style>
 <body>
 
-    <div class="container">
-        <h1>Welcome!</h1>
-    </div>
+     <div class="peach-blob peach-blob-1"></div>
+    <div class="peach-blob peach-blob-2"></div>
 
-    <hr>
-
+    <div class="overlay-container">
     <!-- Cover Photo -->
     <div>
         <img src="<?php echo $cover_photo; ?>" class="cover-photo">
@@ -328,8 +295,11 @@ $result_posts = $stmt_posts->get_result();
  
 
     <!-- Packages List -->
+     
     <div class="container">
+        
         <h2>Available Packages</h2>
+        <div class="card-grid">
         <?php if ($result_packages->num_rows > 0): ?>
             <?php while ($package = $result_packages->fetch_assoc()): ?>
                 <div class="package-card">
@@ -417,16 +387,18 @@ $review_count = count($reviews);
         <?php else: ?>
             <p>No packages available.</p>
         <?php endif; ?>
+        </div>
     </div>
 
 
        <!-- Freelancer Posts -->
-       <div class="container post-container">
+      
         <h2>Freelancer Posts</h2>
+        <div class="card-grid">
         <?php if ($result_posts->num_rows > 0): ?>
             <?php while ($post = $result_posts->fetch_assoc()): ?>
                 <div class="post">
-                    <div class="post-caption"><?php echo nl2br(htmlspecialchars($post['caption'])); ?></div>
+                    
                     <?php if ($post['media_type'] == 'image' && !empty($post['media_path'])): ?>
                         <div class="post-media">
                             <img src="../<?php echo htmlspecialchars($post['media_path']); ?>" alt="Post Image">
@@ -439,6 +411,7 @@ $review_count = count($reviews);
                             </video>
                         </div>
                     <?php endif; ?>
+                    <div class="post-caption"><?php echo nl2br(htmlspecialchars($post['caption'])); ?></div>
                     <p><small>Posted on: <?php echo date("F j, Y, g:i a", strtotime($post['created_at'])); ?></small></p>
                 </div>
             <?php endwhile; ?>
@@ -446,7 +419,9 @@ $review_count = count($reviews);
             <p>No posts available.</p>
         <?php endif; ?>
     </div>
-    <a href="browse_freelancers.php" class="back-btn">Back</a>
+      
+    <a href="browse_freelancers.php" class="back-btn"> <i class="fas fa-arrow-left"></i>Back</a>
+        </div>
 
     <script>
     function toggleReviews(packageId) {

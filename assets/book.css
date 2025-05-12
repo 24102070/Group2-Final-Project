@@ -1,105 +1,118 @@
+/* book.css */
 
 /* Global Styling */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f7fa;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #5A4A42;
+    line-height: 1.6;
+    background: url('https://images.unsplash.com/photo-1589243853654-393fcf7c870b?q=80&w=2940&auto=format&fit=crop') no-repeat center center fixed;
+    background-size: 200% 200%;
+    animation: gradient 55s ease infinite;
+    min-height: 100vh;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .container {
-    width: 80%;
-    margin: 0 auto;
+    max-width: 900px;
+    margin: 60px auto;
+    background: rgba(255, 255, 255, 0.85);
     padding: 40px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(255, 173, 153, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
-h1 {
-    text-align: center;
-    color: #4CAF50;
-    font-size: 2em;
-    margin-bottom: 30px;
-}
-
-.message {
-    color: #FF5733;
-    text-align: center;
-    font-size: 1.2em;
+h1, h3 {
+    font-weight: 600;
+    color: #3B2C27;
     margin-bottom: 20px;
 }
 
-h3 {
-    margin-bottom: 15px;
-    font-size: 1.5em;
-    color: #333;
+.note {
+    font-style: italic;
+    color: #9c6e60;
+    margin-bottom: 25px;
 }
 
-/* Schedule Cards */
+.message {
+    background-color: #ffe6e1;
+    color: #8a2f1c;
+    padding: 10px 15px;
+    border-left: 5px solid #ff7a57;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Schedule Card Styling */
 .schedule-card {
-    background: linear-gradient(145deg, #ffffff, #f4f6fa);
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
     padding: 20px;
-    margin: 10px 0;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
-.schedule-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.schedule-info {
-    flex-grow: 1;
-}
-
-.schedule-info strong {
-    color: #4CAF50;
-    font-size: 1.2em;
-}
-
-.schedule-card p {
-    font-size: 1em;
+.schedule-info p {
     margin: 5px 0;
-    color: #666;
+    font-weight: 500;
 }
 
-/* Book Now Button */
-.schedule-card button {
-    background-color: #4CAF50;
-    color: white;
+button {
+    padding: 10px 20px;
+    background-color: #ffbfa3;
     border: none;
-    padding: 12px 20px;
-    font-size: 1em;
-    border-radius: 8px;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.3s ease;
 }
 
-.schedule-card button:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
+button:hover {
+    background-color: #ff9c76;
 }
 
-/* Small Touches */
-.container p {
-    text-align: center;
-}
-
-.schedule-card button:disabled {
+button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
-.note {
-    margin-top: 20px;
-    font-size: 1em;
-    color: #f44336;
-    text-align: center;
-}
+
+ .back-btn {
+            font-family: 'Poppins', 'Serif';
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            text-align: center;
+            padding: 12px 0;
+            background-color: #E67B7B;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 183, 161, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .back-btn:hover {
+            background-color: rgba(255, 163, 138, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 183, 161, 0.4);
+        }

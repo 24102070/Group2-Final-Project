@@ -74,106 +74,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Freelancer Package</title>
-    <link rel="stylesheet" href="../assets/styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 80%;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #5cb85c;
-            color: #fff;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #4cae4c;
-        }
-
-        a {
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            font-size: 16px;
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/add_package_freelancer.css">
 </head>
 <body>
+    <!-- Floating decorative elements -->
+    <i class="floating-icon heart fas fa-heart"></i>
+    <i class="floating-icon star fas fa-star"></i>
 
-<div class="container">
-    <h1>Add a New Freelancer Package</h1>
-    <form method="POST" action="add_package_freelancer.php" enctype="multipart/form-data">
-        <label for="package_name">Package Name:</label>
-        <input type="text" id="package_name" name="package_name" required><br><br>
+    <div class="main-container">
+        <h1>Create New Package</h1>
+        
+        <form method="POST" action="add_package_freelancer.php" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="package_name">Package Name</label>
+                <input type="text" id="package_name" name="package_name" required placeholder="e.g., Premium Wedding Package">
+            </div>
 
-        <label for="package_details">Package Details:</label>
-        <textarea id="package_details" name="package_details" required></textarea><br><br>
+            <div class="form-group">
+                <label for="package_details">Package Details</label>
+                <textarea id="package_details" name="package_details" required placeholder="Describe what this package includes..."></textarea>
+            </div>
 
-        <label for="package_inclusions">Package Inclusions:</label>
-        <textarea id="package_inclusions" name="package_inclusions" required></textarea><br><br>
+            <div class="form-group">
+                <label for="package_inclusions">Package Inclusions</label>
+                <textarea id="package_inclusions" name="package_inclusions" required placeholder="List all inclusions (separate with commas or bullets)..."></textarea>
+            </div>
 
-        <label for="package_price">Package Price (PHP):</label>
-        <input type="number" id="package_price" name="package_price" required><br><br>
+            <div class="form-group">
+                <label for="package_price">Package Price (₱)</label>
+                <input type="number" id="package_price" name="package_price" required placeholder="Enter price in PHP">
+            </div>
 
-        <label for="package_image">Package Image:</label>
+            <div class="form-group">
+                <label for="package_image">Package Image</label>
+                <div class="file-input-wrapper">
+                    <div class="file-input-button">
+                        <i class="fas fa-cloud-upload-alt"></i> Choose Image
+                         
         <input type="file" id="package_image" name="package_image" accept="image/*"><br><br>
+                    </div>
+                    <div class="file-name" id="file-name">No file chosen</div>
+                </div>
+            </div>
 
-        <button type="submit">Add Package</button>
-    </form>
+            <button type="submit">
+                <i class="fas fa-plus-circle"></i> Create Package
+            </button>
+        </form>
 
-    <br><br>
+        <a href="view_freelance_packages.php" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to My Packages
+        </a>
+    </div>
 
-    <!-- View More Button -->
-    <a href="view_freelance_packages.php">View All Packages</a>
-
-</div>
-
+    <script>
+        // Display selected file name
+        document.getElementById('package_image').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'No file chosen';
+            document.getElementById('file-name').textContent = fileName;
+        });
+    </script>
 </body>
 </html>

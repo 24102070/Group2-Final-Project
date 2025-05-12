@@ -270,6 +270,20 @@ tr:hover {
     width: calc(100% - 20px);
     margin: 0 auto;
 }
+.no-form-style {
+    background-color: rgba(220, 53, 69, 0.9); /* red-like */
+    color: white;
+    border-left: none;
+    border-radius: 30px;
+    padding: 10px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.no-form-style:hover {
+    background-color: rgba(200, 40, 55, 0.9);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

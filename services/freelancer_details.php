@@ -99,461 +99,289 @@ $result_posts = $stmt_posts->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($freelancer['name']); ?> - Details</title>
-    <link rel="stylesheet" href="../assets/styles.css">
-    <style>
-        /* Post Section */
-        .post-container {
-            margin-top: 20px;
-        }
-
-        .post {
-            background: #f9f9f9;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .post-caption {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .post-media {
-            margin-top: 10px;
-        }
-
-        .post-media img, .post-media video {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .post p small {
-            font-size: 12px;
-            color: #777;
-        }
-
-        /* Existing Styles */
-        .cover-photo {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .profile-container {
-            display: flex;
-            justify-content: center;
-            margin-top: -50px;
-        }
-
-        .profile-photo {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .package-card {
-            background: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .package-title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .package-details, .package-price {
-            font-size: 16px;
-        }
-
-        .btn-book {
-            display: inline-block;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .btn-book:hover {
-            background-color: #0056b3;
-        }
-
-        .package-image {
-            width: 100%;
-            max-height: 250px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .back-btn {
-            display: inline-block;
-            margin: 20px;
-            text-decoration: none;
-            color: #333;
-        }
-
-        .package-card {
-            background: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 8px;
-            width: 250px;
-            height: 200px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .package-card:hover {
-            height: auto;
-            width: 100%;
-            padding: 20px;
-            z-index: 2;
-        }
-
-        .package-title,
-        .package-price {
-            font-size: 18px;
-            font-weight: bold;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .package-details,
-        .package-price,
-        .package-card p {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            height: 0;
-            overflow: hidden;
-        }
-
-        .package-card:hover .package-details,
-        .package-card:hover .package-price,
-        .package-card:hover p {
-            opacity: 1;
-            height: auto;
-            margin-top: 10px;
-        }
-
-        .package-image {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .review-section {
-            margin-top: 20px;
-        }
-
-        .review-section h3 {
-            font-size: 24px;
-        }
-
-        .review-container {
-            margin-top: 10px;
-            background: #f1f1f1;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .review {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .rating {
-            font-size: 18px;
-            color: #ffcc00;
-        }
-
-        .star-rating {
-            direction: rtl;
-            font-size: 30px;
-        }
-
-        .star-rating input {
-            display: none;
-        }
-
-        .star-rating label {
-            color: #ddd;
-            cursor: pointer;
-        }
-
-        .star-rating input:checked ~ label {
-            color: #ffcc00;
-        }
-
-        .star-rating input:hover ~ label {
-            color: #ffcc00;
-        }
-
-        .review-btn {
-            background-color: #007bff;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .review-btn:hover {
-            background-color: #0056b3;
-        }
-
-        /* Search Bar Styling */
-.search-container {
-    margin: 20px 0;
-    text-align: center;
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/freelancer_details.css">
+    
+<style>
+     body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 20px;
+    color:rgb(36, 35, 35) !important;
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
 }
 
-#searchBar {
-    width: 50%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.unsplash.com/photo-1676734628558-624737d3e094?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0.3; /* Adjust opacity of the image */
+    z-index: -1; /* Ensure the image is behind the content */
 }
-    </style>
+
+body {
+    min-height: 100vh;
+}
+
+.con {
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.1); /* Black background with 0.2 opacity */
+    border-radius: 35px;
+}
+
+.prof-con {
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.6); 
+    border-radius: 35px;
+    padding: 15px;
+}
+</style>
+
 </head>
 <body>
 
-    <div class="container">
-        <h1>Welcome!</h1>
-    </div>
-
-    <hr>
-
-    <!-- Cover Photo -->
-    <div>
-        <img src="<?php echo $cover_photo; ?>" class="cover-photo">
-    </div>
-
-    <!-- Profile Photo -->
-    <div class="profile-container">
-        <img src="<?php echo $profile_photo; ?>" class="profile-photo">
-    </div>
-
-    <!-- Freelancer Details -->
-    <div class="container">
-        <h2>Freelancer Profile</h2>
-        <p><strong>Name:</strong> <?php echo htmlspecialchars($freelancer['name']); ?></p>
-        <p><strong>Description:</strong> <?php echo nl2br(htmlspecialchars($freelancer['description'])); ?></p>
-        <p><strong>Profession:</strong> <?php echo htmlspecialchars($freelancer['profession']); ?></p>
-        <p><strong>Contact:</strong> <?php echo htmlspecialchars($freelancer['contact']); ?></p>
-        <p><strong>Email:</strong> <?php echo htmlspecialchars($freelancer['email']); ?></p>
-        <p><strong>Minimum Fee:</strong> PHP <?php echo number_format($freelancer['minimum_fee'], 2); ?></p>
-    </div>
-
- 
-
-    <!-- Packages List -->
-    <div class="container">
-        <h2>Available Packages</h2>
-        <div class="search-container">
-    <input type="text" id="searchBar" onkeyup="filterPackages()" placeholder="Search for a package...">
+<div class="con">
+<div class="container">
+    <h1 style="font-family: 'Playfair Display', serif; font-weight: 800; font-size: 36px; color: #E67B7B;">
+        <?php echo htmlspecialchars($freelancer['name']); ?>
+    </h1>
+    <p><?php echo htmlspecialchars($freelancer['profession']); ?></p>
 </div>
+
+<!-- Cover Photo -->
+<div class="container">
+    <img src="<?php echo $cover_photo; ?>" class="cover-photo">
+</div>
+
+<!-- Profile Section -->
+<div class="container">
+    
+    <div class="profile-section">
+        <img src="<?php echo $profile_photo; ?>" class="profile-photo">
+        <div class="profile-details">
+            <h2><?php echo htmlspecialchars($freelancer['name']); ?></h2>
+            <p><?php echo htmlspecialchars($freelancer['contact']); ?></p>
+            <p><?php echo htmlspecialchars($freelancer['email']); ?></p>
+            <p><strong>Minimum Fee:</strong> PHP <?php echo number_format($freelancer['minimum_fee'], 2); ?></p>
+        </div>
+    </div>
+<div class = "prof-con">
+
+    <div class="profile-details">
+        <p><?php echo nl2br(htmlspecialchars($freelancer['about'])); ?></p>
+    </div>
+</div>
+</div>
+
+<!-- Packages Section -->
+<div class="container">
+    <h2 style="font-family: 'Playfair Display', serif; color: #E67B7B;">Available Packages</h2>
+    
+    <div class="search-container">
+        <input type="text" id="searchBar" onkeyup="filterPackages()" placeholder="Search for packages...">
+    </div>
+    
+    <div class="packages-container">
         <?php if ($result_packages->num_rows > 0): ?>
             <?php while ($package = $result_packages->fetch_assoc()): ?>
                 <div class="package-card">
                     <?php if (!empty($package['image'])): ?>
-                        <img src="../<?php echo htmlspecialchars($package['image']); ?>" class="package-image" alt="Package Image">
+                        <div class="package-image-container">
+                            <img src="../<?php echo htmlspecialchars($package['image']); ?>" class="package-image" alt="<?php echo htmlspecialchars($package['name']); ?>">
+                        </div>
                     <?php else: ?>
-                        <img src="../assets/default-package.jpg" class="package-image" alt="Default Package Image">
+                        <div class="package-image-container">
+                            <img src="../assets/default-package.jpg" class="package-image" alt="Default Package Image">
+                        </div>
                     <?php endif; ?>
-                    <div class="package-title"><?php echo htmlspecialchars($package['name']); ?></div>
-                    <p class="package-details"><?php echo nl2br(htmlspecialchars($package['details'])); ?></p>
-                    <p><strong>Inclusions:</strong><br><?php echo nl2br(htmlspecialchars($package['inclusions'])); ?></p>
-                    <p class="package-price">Price: PHP <?php echo number_format($package['price'], 2); ?></p>
-                    <a href="../booking/freelancer_book.php?freelancer_id=<?php echo $freelancer_id; ?>&package_id=<?php echo $package['id']; ?>" class="btn-book">Book Now</a>
-                
-
-                     <!-- Show average rating and number of reviews -->
-                <?php 
-                    $pkg_id = $package['id'];
-                    $avg = isset($reviews_data[$pkg_id]) ? $reviews_data[$pkg_id]['average_rating'] : "No ratings yet";
-                    $total = isset($reviews_data[$pkg_id]) ? $reviews_data[$pkg_id]['total_reviews'] : 0;
-                ?>
-                <p><strong>Rating:</strong> <?= is_numeric($avg) ? "$avg ★ ($total reviews)" : $avg ?></p>
-
-                <?php
-                        $user_id = $_SESSION['user_id'];
-
-                        // Check if the user already left a review for this package
-                        $sql_check_review = "SELECT id FROM freelancers_review_ratings WHERE user_id = ? AND freelancer_id = ? AND package_id = ?";
-                        $stmt_check = $conn->prepare($sql_check_review);
-                        $stmt_check->bind_param("iii", $user_id, $freelancer_id, $pkg_id);
-                        $stmt_check->execute();
-                        $result_check = $stmt_check->get_result();
-                        $already_reviewed = $result_check->num_rows > 0;
+                    
+                    <div class="package-content">
+                        <h3 class="package-title"><?php echo htmlspecialchars($package['name']); ?></h3>
+                        <p class="package-details"><?php echo nl2br(htmlspecialchars($package['details'])); ?></p>
+                        <p><strong>Inclusions:</strong><br><?php echo nl2br(htmlspecialchars($package['inclusions'])); ?></p>
+                        <p class="package-price">PHP <?php echo number_format($package['price'], 2); ?></p>
+                        
+                        <?php 
+                            $pkg_id = $package['id'];
+                            $avg = isset($reviews_data[$pkg_id]) ? $reviews_data[$pkg_id]['average_rating'] : "No ratings yet";
+                            $total = isset($reviews_data[$pkg_id]) ? $reviews_data[$pkg_id]['total_reviews'] : 0;
                         ?>
-
-                    <div class="review-section">
-
-                    <?php if (!$already_reviewed): ?>
-                        <h3>Leave a Review</h3>
-                        <form action="freelancer_details.php?id=<?php echo $freelancer_id; ?>" method="POST">
-                            <input type="hidden" name="package_id" value="<?php echo $package['id']; ?>">
+                        <p><strong>Rating:</strong> <?= is_numeric($avg) ? "$avg ★ ($total reviews)" : $avg ?></p>
+                        
+                        <div class="package-actions">
+                            <a href="../booking/freelancer_book.php?freelancer_id=<?php echo $freelancer_id; ?>&package_id=<?php echo $package['id']; ?>" class="btn-book">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                        </div>
+                        
+                        <?php
+                            $user_id = $_SESSION['user_id'];
+                            $check_sql = "SELECT id FROM freelancers_review_ratings WHERE user_id = ? AND freelancer_id = ? AND package_id = ?";
+                            $stmt_check = $conn->prepare($check_sql);
+                            $stmt_check->bind_param("iii", $user_id, $freelancer_id, $pkg_id);
+                            $stmt_check->execute();
+                            $result_check = $stmt_check->get_result();
+                            $already_reviewed = $result_check->num_rows > 0;
+                        ?>
+                        
+                        <div class="review-container">
+                            <?php if (!$already_reviewed): ?>
+                                <h4>Leave a Review</h4>
+                                <form action="freelancer_details.php?id=<?php echo $freelancer_id; ?>" method="POST">
+                                    <input type="hidden" name="package_id" value="<?php echo $package['id']; ?>">
+                                    
+                                    <div class="star-rating">
+                                        <input type="radio" id="star5-<?php echo $package['id']; ?>" name="rating" value="5"><label for="star5-<?php echo $package['id']; ?>">★</label>
+                                        <input type="radio" id="star4-<?php echo $package['id']; ?>" name="rating" value="4"><label for="star4-<?php echo $package['id']; ?>">★</label>
+                                        <input type="radio" id="star3-<?php echo $package['id']; ?>" name="rating" value="3"><label for="star3-<?php echo $package['id']; ?>">★</label>
+                                        <input type="radio" id="star2-<?php echo $package['id']; ?>" name="rating" value="2"><label for="star2-<?php echo $package['id']; ?>">★</label>
+                                        <input type="radio" id="star1-<?php echo $package['id']; ?>" name="rating" value="1"><label for="star1-<?php echo $package['id']; ?>">★</label>
+                                    </div>
+                                    
+                                    <textarea name="review" placeholder="Write your review here" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; min-height: 80px;"></textarea><br>
+                                    <button type="submit" name="submit_review" class="btn-book" style="margin-top: 10px;">
+                                        <i class="fas fa-paper-plane"></i> Submit Review
+                                    </button>
+                                </form>
+                            <?php else: ?>
+                                <p><em>You have already reviewed this package.</em></p>
+                            <?php endif; ?>
                             
-                            <!-- Star Rating -->
-                            <div class="star-rating">
-                                <input type="radio" id="star5-<?php echo $package['id']; ?>" name="rating" value="5"><label for="star5-<?php echo $package['id']; ?>">★</label>
-                                <input type="radio" id="star4-<?php echo $package['id']; ?>" name="rating" value="4"><label for="star4-<?php echo $package['id']; ?>">★</label>
-                                <input type="radio" id="star3-<?php echo $package['id']; ?>" name="rating" value="3"><label for="star3-<?php echo $package['id']; ?>">★</label>
-                                <input type="radio" id="star2-<?php echo $package['id']; ?>" name="rating" value="2"><label for="star2-<?php echo $package['id']; ?>">★</label>
-                                <input type="radio" id="star1-<?php echo $package['id']; ?>" name="rating" value="1"><label for="star1-<?php echo $package['id']; ?>">★</label>
-                            </div>
+                            <?php
+                                $reviews_sql = "SELECT frr.rating, frr.review, frr.created_at, u.name 
+                                                FROM freelancers_review_ratings frr 
+                                                JOIN users u ON frr.user_id = u.id 
+                                                WHERE frr.freelancer_id = ? AND frr.package_id = ? 
+                                                ORDER BY frr.created_at DESC";
+                                $stmt_reviews = $conn->prepare($reviews_sql);
+                                $stmt_reviews->bind_param("ii", $freelancer_id, $package['id']);
+                                $stmt_reviews->execute();
+                                $reviews_result = $stmt_reviews->get_result();
+                                
+                                $reviews = [];
+                                while ($row = $reviews_result->fetch_assoc()) {
+                                    $reviews[] = $row;
+                                }
+                                $review_count = count($reviews);
+                            ?>
                             
-                            <textarea name="review" placeholder="Write your review here" required></textarea><br>
-                            <button type="submit" name="submit_review" class="review-btn">Submit Review</button>
-                        </form>
+                            <h4 style="margin-top: 20px;">Reviews</h4>
+                            <?php if ($review_count > 0): ?>
+                                <?php for ($i = 0; $i < min(3, $review_count); $i++): ?>
+                                    <div class="review-card">
+                                        <div class="reviewer-name"><?= htmlspecialchars($reviews[$i]['name']) ?> (<?= $reviews[$i]['rating'] ?>/5)</div>
+                                        <p><?= nl2br(htmlspecialchars($reviews[$i]['review'])) ?></p>
+                                        <small><?= date("F j, Y", strtotime($reviews[$i]['created_at'])) ?></small>
+                                    </div>
+                                <?php endfor; ?>
+                                
+                                <?php if ($review_count > 3): ?>
+                                    <button class="btn-book" onclick="toggleReviews(<?= $package['id'] ?>)" style="margin-top: 10px;">
+                                        <i class="fas fa-chevron-down"></i> View More
+                                    </button>
+                                    <div id="more-reviews-<?= $package['id'] ?>" style="display: none; margin-top: 10px;">
+                                        <?php for ($i = 3; $i < $review_count; $i++): ?>
+                                            <div class="review-card">
+                                                <div class="reviewer-name"><?= htmlspecialchars($reviews[$i]['name']) ?> (<?= $reviews[$i]['rating'] ?>/5)</div>
+                                                <p><?= nl2br(htmlspecialchars($reviews[$i]['review'])) ?></p>
+                                                <small><?= date("F j, Y", strtotime($reviews[$i]['created_at'])) ?></small>
+                                            </div>
+                                        <?php endfor; ?>
+                                    </div>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <p>No reviews yet.</p>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                    <?php else: ?>
-                    <p><em>You have already left a review for this package.</em></p>
-                <?php endif; ?>
-
-                <?php
-// Check if user already reviewed this package
-$user_review = false;
-$check_user_review = $conn->prepare("SELECT id FROM freelancers_review_ratings WHERE freelancer_id = ? AND package_id = ? AND user_id = ?");
-$check_user_review->bind_param("iii", $freelancer_id, $package['id'], $_SESSION['user_id']);
-$check_user_review->execute();
-$check_user_review->store_result();
-$user_review = $check_user_review->num_rows > 0;
-
-// Fetch all reviews for this package
-$reviews_sql = "SELECT frr.rating, frr.review, frr.created_at, u.name 
-                FROM freelancers_review_ratings frr 
-                JOIN users u ON frr.user_id = u.id 
-                WHERE frr.freelancer_id = ? AND frr.package_id = ? 
-                ORDER BY frr.created_at DESC";
-$stmt_reviews = $conn->prepare($reviews_sql);
-$stmt_reviews->bind_param("ii", $freelancer_id, $package['id']);
-$stmt_reviews->execute();
-$reviews_result = $stmt_reviews->get_result();
-
-$reviews = [];
-while ($row = $reviews_result->fetch_assoc()) {
-    $reviews[] = $row;
-}
-$review_count = count($reviews);
-?>
-
-<div style="margin-top: 15px;">
-    <h4>Reviews:</h4>
-    <?php if ($review_count > 0): ?>
-        <?php for ($i = 0; $i < min(3, $review_count); $i++): ?>
-            <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
-                <strong><?= htmlspecialchars($reviews[$i]['name']) ?></strong>
-                (<?= $reviews[$i]['rating'] ?>/5)<br>
-                <small><?= date("F j, Y", strtotime($reviews[$i]['created_at'])) ?></small><br>
-                <p><?= nl2br(htmlspecialchars($reviews[$i]['review'])) ?></p>
-            </div>
-        <?php endfor; ?>
-
-        <?php if ($review_count > 3): ?>
-            <button class="review-btn" onclick="toggleReviews(<?= $package['id'] ?>)">View More</button>
-            <div id="more-reviews-<?= $package['id'] ?>" style="display: none; margin-top: 10px;">
-                <?php for ($i = 3; $i < $review_count; $i++): ?>
-                    <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
-                        <strong><?= htmlspecialchars($reviews[$i]['name']) ?></strong>
-                        (<?= $reviews[$i]['rating'] ?>/5)<br>
-                        <small><?= date("F j, Y", strtotime($reviews[$i]['created_at'])) ?></small><br>
-                        <p><?= nl2br(htmlspecialchars($reviews[$i]['review'])) ?></p>
-                    </div>
-                <?php endfor; ?>
-            </div>
-        <?php endif; ?>
-    <?php else: ?>
-        <p>No reviews yet.</p>
-    <?php endif; ?>
-</div>
-
                 </div>
             <?php endwhile; ?>
         <?php else: ?>
-            <p>No packages available.</p>
+            <div class="no-content">
+                <i class="fas fa-box-open"></i>
+                <p>No packages available yet.</p>
+            </div>
         <?php endif; ?>
     </div>
+</div>
 
-
-       <!-- Freelancer Posts -->
-       <div class="container post-container">
-        <h2>Freelancer Posts</h2>
+<!-- Posts Section -->
+<div class="container">
+    <h2 style="font-family: 'Playfair Display', serif; color: #E67B7B;">Recent Posts</h2>
+    
+    <div class="post-grid">
         <?php if ($result_posts->num_rows > 0): ?>
             <?php while ($post = $result_posts->fetch_assoc()): ?>
-                <div class="post">
-                    <div class="post-caption"><?php echo nl2br(htmlspecialchars($post['caption'])); ?></div>
+                <div class="post-card">
                     <?php if ($post['media_type'] == 'image' && !empty($post['media_path'])): ?>
-                        <div class="post-media">
-                            <img src="../<?php echo htmlspecialchars($post['media_path']); ?>" alt="Post Image">
+                        <div class="post-media-container">
+                            <img src="../<?php echo htmlspecialchars($post['media_path']); ?>" class="post-media" alt="Post Image">
                         </div>
                     <?php elseif ($post['media_type'] == 'video' && !empty($post['media_path'])): ?>
-                        <div class="post-media">
-                            <video controls>
+                        <div class="post-media-container">
+                            <video controls class="post-media">
                                 <source src="../<?php echo htmlspecialchars($post['media_path']); ?>" type="video/mp4">
-                                Your browser does not support the video tag.
                             </video>
                         </div>
                     <?php endif; ?>
-                    <p><small>Posted on: <?php echo date("F j, Y, g:i a", strtotime($post['created_at'])); ?></small></p>
+                    
+                    <div class="post-content">
+                        <div class="post-caption"><?php echo nl2br(htmlspecialchars($post['caption'])); ?></div>
+                        <p class="post-date">Posted on: <?php echo date("F j, Y, g:i a", strtotime($post['created_at'])); ?></p>
+                    </div>
                 </div>
             <?php endwhile; ?>
         <?php else: ?>
-            <p>No posts available.</p>
+            <div class="no-content">
+                <i class="fas fa-newspaper"></i>
+                <p>No posts available yet.</p>
+            </div>
         <?php endif; ?>
     </div>
-    <a href="freelancers.php" class="back-btn">Back to Dashboard</a>
+</div>
 
-    <script>
+<div class="container" style="text-align: center;">
+    <a href="freelancers.php" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Freelancers
+    </a>
+</div>
+</div>
+<script>
     function toggleReviews(packageId) {
         var moreReviews = document.getElementById("more-reviews-" + packageId);
+        var button = event.target;
+        
         if (moreReviews.style.display === "none") {
             moreReviews.style.display = "block";
+            button.innerHTML = '<i class="fas fa-chevron-up"></i> View Less';
         } else {
             moreReviews.style.display = "none";
+            button.innerHTML = '<i class="fas fa-chevron-down"></i> View More';
         }
     }
-</script>
 
-<script>
     function filterPackages() {
-        // Get the search input value and convert it to lowercase for case-insensitive search
         let searchInput = document.getElementById('searchBar').value.toLowerCase();
-        
-        // Get all package cards
         let packageCards = document.querySelectorAll('.package-card');
         
-        // Loop through all package cards and hide those that don't match the search input
         packageCards.forEach(function(packageCard) {
-            // Get the package name and details, convert to lowercase for case-insensitive comparison
             let packageName = packageCard.querySelector('.package-title').textContent.toLowerCase();
             let packageDetails = packageCard.querySelector('.package-details').textContent.toLowerCase();
             
-            // Check if the search input matches any part of the package name or details
             if (packageName.includes(searchInput) || packageDetails.includes(searchInput)) {
-                packageCard.style.display = ''; // Show package
+                packageCard.style.display = '';
             } else {
-                packageCard.style.display = 'none'; // Hide package
+                packageCard.style.display = 'none';
             }
         });
     }

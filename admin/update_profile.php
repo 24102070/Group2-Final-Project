@@ -82,35 +82,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Company Profile</title>
-    <link rel="stylesheet" href="../assets/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/update_profile.css">
+
 </head>
 <body>
 
-    <h1>Update Company Profile</h1>
+    <div class="container">
+        <h1><i class="fas fa-building"></i> Update Company Profile</h1>
 
-    <form method="POST" enctype="multipart/form-data">
-        <label>Profile Photo:</label><br>
-        <img src="<?php echo $profile_photo; ?>" width="100"><br>
-        <input type="file" name="profile_photo"><br>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="image-preview-container">
+                <div class="image-preview-wrapper">
+                    <label>Profile Photo</label>
+                    <img src="<?php echo $profile_photo; ?>" class="image-preview">
+                    <span class="image-preview-label">Current Profile</span>
+                    <input type="file" name="profile_photo" accept="image/*">
+                </div>
+                
+                <div class="image-preview-wrapper">
+                    <label>Cover Photo</label>
+                    <img src="<?php echo $cover_photo; ?>" class="image-preview">
+                    <span class="image-preview-label">Current Cover</span>
+                    <input type="file" name="cover_photo" accept="image/*">
+                </div>
+            </div>
 
-        <label>Cover Photo:</label><br>
-        <img src="<?php echo $cover_photo; ?>" width="300"><br>
-        <input type="file" name="cover_photo"><br>
+            <label>About Us</label>
+            <textarea name="about" placeholder="Tell clients about your company..." required><?php echo $company['about'] ?? ''; ?></textarea>
 
-        <label>About Us:</label><br>
-        <textarea name="about" required><?php echo $company['about'] ?? ''; ?></textarea><br>
+            <label>Contact Information</label>
+            <input type="text" name="contact" placeholder="Email, phone, or other contact details" value="<?php echo $company['contact'] ?? ''; ?>" required>
 
-        <label>Contact:</label><br>
-        <input type="text" name="contact" value="<?php echo $company['contact'] ?? ''; ?>" required><br>
+            <label>Minimum Fee ($)</label>
+            <input type="number" step="0.01" name="minimum_fee" placeholder="Minimum service fee" value="<?php echo $company['minimum_fee'] ?? ''; ?>" required>
 
-        <label>Minimum Fee:</label><br>
-        <input type="number" step="0.01" name="minimum_fee" value="<?php echo $company['minimum_fee'] ?? ''; ?>" required><br>
+            <button type="submit">
+                <i class="fas fa-save"></i> Update Profile
+            </button>
+        </form>
 
-        <button type="submit">Update Profile</button>
-    </form>
-
-    <a href="dashboard.php">Back to Dashboard</a>
+        <div class="back-link">
+            <a href="dashboard.php"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+    </div>
 
 </body>
 </html>

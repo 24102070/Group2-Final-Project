@@ -76,31 +76,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Update Freelancer Profile</title>
-    <link rel="stylesheet" href="../assets/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;300;400;500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/update_freelancer_profile.css">
+
 </head>
 <body>
 
-    <h1>Update Freelancer Profile</h1>
+    <div class="peach-blob peach-blob-1"></div>
+    <div class="peach-blob peach-blob-2"></div>
 
-    <form method="POST" enctype="multipart/form-data">
-        <label>Profile Photo:</label><br>
-        <img src="<?php echo $profile_photo; ?>" width="100"><br>
-        <input type="file" name="profile_photo"><br>
+    <div class="overlay-container">
+        <h1>Update Freelancer Profile</h1>
 
-        <label>Cover Photo:</label><br>
-        <img src="<?php echo $cover_photo; ?>" width="300"><br>
-        <input type="file" name="cover_photo"><br>
+        <form method="POST" enctype="multipart/form-data">
+            <label>Profile Photo:</label><br>
+            <img src="<?php echo $profile_photo; ?>" width="100"><br>
+            <input type="file" name="profile_photo"><br>
 
-        <label>About Me:</label><br>
-        <textarea name="about" required><?php echo $freelancer['about'] ?? ''; ?></textarea><br>
+            <label>Cover Photo:</label><br>
+            <img src="<?php echo $cover_photo; ?>" width="300"><br>
+            <input type="file" name="cover_photo"><br>
 
-        <label>Contact:</label><br>
-        <input type="text" name="contact" value="<?php echo $freelancer['contact'] ?? ''; ?>" required><br>
+            <label>About Me:</label><br>
+            <textarea name="about" required><?php echo $freelancer['about'] ?? ''; ?></textarea><br>
 
-        <button type="submit">Update Profile</button>
-    </form>
+            <label>Contact:</label><br>
+            <input type="text" name="contact" value="<?php echo $freelancer['contact'] ?? ''; ?>" required><br>
 
-    <a href="freelancer_dashboard.php">Back to Dashboard</a>
+            <button type="submit" class="btn btn-submit"><i class="fas fa-save"></i> Update Profile</button>
+        </form>
+
+        <div class="btn-back">
+            <a href="freelancer_dashboard.php"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+    </div>
 
 </body>
 </html>

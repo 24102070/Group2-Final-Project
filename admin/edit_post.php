@@ -58,28 +58,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!-- HTML FORM -->
-<h2>Edit Post</h2>
-<form method="POST" enctype="multipart/form-data">
-    <label for="caption">Caption:</label><br>
-    <textarea name="caption" rows="4" required><?php echo htmlspecialchars($post['caption']); ?></textarea><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Post</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;300;400;500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/edit_post.css">
+</head>
+<body>
 
-    <?php if (!empty($post['media_path']) && $post['media_type'] == 'image'): ?>
-        <img src="../<?php echo htmlspecialchars($post['media_path']); ?>" alt="Current Image" style="max-width: 200px;"><br><br>
-    <?php elseif (!empty($post['media_path']) && $post['media_type'] == 'video'): ?>
-        <video controls style="max-width: 200px;">
-            <source src="../<?php echo htmlspecialchars($post['media_path']); ?>" type="video/mp4">
-        </video><br><br>
-    <?php endif; ?>
+    <div class="peach-blob peach-blob-1"></div>
+    <div class="peach-blob peach-blob-2"></div>
 
-    <label for="media">Replace Media (optional):</label><br>
-    <input type="file" name="media" accept="image/*, video/*"><br><br>
+    <div class="overlay-container">
+        <h2>Edit Post</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="caption">Caption:</label>
+            <textarea name="caption" required><?php echo htmlspecialchars($post['caption']); ?></textarea>
 
-    <label for="media_type">Media Type:</label>
-    <select name="media_type" required>
-        <option value="image" <?php if ($post['media_type'] == 'image') echo 'selected'; ?>>Image</option>
-        <option value="video" <?php if ($post['media_type'] == 'video') echo 'selected'; ?>>Video</option>
-    </select><br><br>
+            <?php if (!empty($post['media_path'])): ?>
+                <div class="current-media">
+                    <?php if ($post['media_type'] == 'image'): ?>
+                        <img src="../<?php echo htmlspecialchars($post['media_path']); ?>" alt="Current Image">
+                    <?php elseif ($post['media_type'] == 'video'): ?>
+                        <video controls>
+                            <source src="../<?php echo htmlspecialchars($post['media_path']); ?>" type="video/mp4">
+                        </video>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
 
-    <button type="submit">Update Post</button>
-</form>
+            <label for="media">Replace Media (optional):</label>
+            <input type="file" name="media" accept="image/*, video/*">
+
+            <label for="media_type">Media Type:</label>
+            <select name="media_type" required>
+                <option value="image" <?php if ($post['media_type'] == 'image') echo 'selected'; ?>>Image</option>
+                <option value="video" <?php if ($post['media_type'] == 'video') echo 'selected'; ?>>Video</option>
+            </select>
+
+            <button type="submit">Update Post</button>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -27,133 +27,60 @@ if ($result_packages->num_rows == 0) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>My Freelance Packages</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;300;400;500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Freelance Packages</title>
-    <link rel="stylesheet" href="../assets/styles.css">
-    <style>
-        /* Similar CSS styling as your original one, with minor adjustments */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
+    <link rel="stylesheet" href="../assets/view_freelance_packages.css">
 
-        .container {
-            width: 80%;
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        .package-card {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            padding: 20px;
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .package-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .package-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .package-details {
-            font-size: 16px;
-            color: #666;
-            margin: 10px 0;
-        }
-
-        .package-price {
-            font-size: 18px;
-            color: #5cb85c;
-            margin-bottom: 10px;
-        }
-
-        .package-image {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .btn-view {
-            display: inline-block;
-            text-decoration: none;
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-view:hover {
-            background-color: #0056b3;
-        }
-
-        .no-packages {
-            text-align: center;
-            font-size: 18px;
-            color: #999;
-        }
-    </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>My Freelance Packages</h1>
+    <div class="peach-blob peach-blob-1"></div>
+    <div class="peach-blob peach-blob-2"></div>
 
-    <?php if (isset($no_packages_message)): ?>
-        <p class="no-packages"><?php echo $no_packages_message; ?></p>
-        <a href="add_freelance_package.php" class="btn-view">Add New Package</a>
-    <?php else: ?>
-        <!-- Loop through each freelance package and display its details -->
-        <?php while ($package = $result_packages->fetch_assoc()): ?>
-            <div class="package-card">
-                <h2><?php echo htmlspecialchars($package['name']); ?></h2>
-                <p><strong>Details:</strong> <?php echo nl2br(htmlspecialchars($package['details'])); ?></p>
-                <p><strong>Inclusions:</strong> <?php echo nl2br(htmlspecialchars($package['inclusions'])); ?></p>
-                <p class="package-price">PHP <?php echo number_format($package['price'], 2); ?></p>
+    <div class="overlay-container">
+        <h1>My Freelance Packages</h1>
 
-                <?php if (!empty($package['image'])): ?>
-                    <img src="../<?php echo htmlspecialchars($package['image']); ?>" alt="Package Image" class="package-image">
-                <?php endif; ?>
-
-                <div class="buttons">
-                    <!-- Edit button -->
-                    <a href="edit_freelance_package.php?id=<?php echo $package['id']; ?>" class="btn-view">Edit</a>
-
-                    <!-- Delete button -->
-                    <a href="delete_freelance_package.php?id=<?php echo $package['id']; ?>" class="delete" onclick="return confirm('Are you sure you want to delete this package?')">Delete</a>
+        <div class="packages-container">
+            <?php if (isset($no_packages_message)): ?>
+                <div class="no-packages">
+                    <i class="far fa-calendar-times"></i>
+                    <?php echo $no_packages_message; ?>
+                    <div style="margin-top: 20px;">
+                        <a href="add_freelance_package.php" class="btn-view">Add New Package</a>
+                    </div>
                 </div>
+            <?php else: ?>
+                <?php while ($package = $result_packages->fetch_assoc()): ?>
+                    <div class="package-card">
+                        <h2 class="package-title"><?php echo htmlspecialchars($package['name']); ?></h2>
+                        <p class="package-details"><strong>Details:</strong> <?php echo nl2br(htmlspecialchars($package['details'])); ?></p>
+                        <p class="package-inclusions"><strong>Inclusions:</strong> <?php echo nl2br(htmlspecialchars($package['inclusions'])); ?></p>
+                        <div class="package-price">
+                            <i class="fas fa-tag"></i>
+                            ₱<?php echo number_format($package['price'], 2); ?>
+                        </div>
 
-                
-            </div>
-            
-        <?php endwhile; ?>
-    <?php endif; ?>
+                        <?php if (!empty($package['image'])): ?>
+                            <div class="image-container">
+                                <img src="../<?php echo htmlspecialchars($package['image']); ?>" alt="Package Image" class="package-image">
+                            </div>
+                        <?php endif; ?>
 
-    <br><br>
-            <a href="freelancer_dashboard.php"><button>Back to Dashboard</button></a>
-</div>
+                        <div class="package-actions">
+                            <a href="edit_freelance_package.php?id=<?php echo $package['id']; ?>" class="btn-view">Edit</a>
+                            <a href="delete_freelance_package.php?id=<?php echo $package['id']; ?>" class="delete" onclick="return confirm('Are you sure you want to delete this package?')">Delete</a>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            <?php endif; ?>
+        </div>
+
+        <a href="freelancer_dashboard.php" class="back-btn">
+            Back to Dashboard
+        </a>
+    </div>
 
 </body>
 </html>

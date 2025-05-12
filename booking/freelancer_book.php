@@ -88,111 +88,130 @@ $schedules_result = $stmt_schedules->get_result();
     <meta charset="UTF-8">
     <title>Book a Schedule</title>
     <link rel="stylesheet" href="../assets/styles.css">
-    <style>
-        /* Global Styling */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f7fa;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
+      <link rel="stylesheet" href="../assets/booked.css">
+   <style>
+        /* book.css */
 
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 40px;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
-        }
+/* Global Styling */
+* {
+    color: #E67B7B !important;
+}
+body {
 
-        h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+    color: #5A4A42;
+    line-height: 1.6;
+    background: url('https://images.unsplash.com/photo-1589243853654-393fcf7c870b?q=80&w=2940&auto=format&fit=crop') no-repeat center center fixed;
+    background-size: 200% 200%;
+    animation: gradient 55s ease infinite;
+    min-height: 100vh;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    max-width: 900px;
+    margin: 60px auto;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(255, 173, 153, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+h1, h3 {
+    font-weight: 600;
+    color: #3B2C27;
+    margin-bottom: 20px;
+}
+
+.note {
+    font-style: italic;
+    color: #9c6e60;
+    margin-bottom: 25px;
+}
+
+.message {
+    background-color: #ffe6e1;
+    color: #8a2f1c;
+    padding: 10px 15px;
+    border-left: 5px solid #ff7a57;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Schedule Card Styling */
+.schedule-card {
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.schedule-info p {
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #ffbfa3;
+    border: none;
+    border-radius: 10px;
+    color: white !important;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff9c76;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+ .back-btn {
+            font-family: 'Poppins', 'Serif';
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
             text-align: center;
-            color: #4CAF50;
-            font-size: 2em;
-            margin-bottom: 30px;
-        }
-
-        .message {
-            color: #FF5733;
-            text-align: center;
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-
-        h3 {
-            margin-bottom: 15px;
-            font-size: 1.5em;
-            color: #333;
-        }
-
-        /* Schedule Cards */
-        .schedule-card {
-            background: linear-gradient(145deg, #ffffff, #f4f6fa);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 10px 0;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .schedule-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .schedule-info {
-            flex-grow: 1;
-        }
-
-        .schedule-info strong {
-            color: #4CAF50;
-            font-size: 1.2em;
-        }
-
-        .schedule-card p {
-            font-size: 1em;
-            margin: 5px 0;
-            color: #666;
-        }
-
-        /* Book Now Button */
-        .schedule-card button {
-            background-color: #4CAF50;
+            padding: 12px 0;
+            background-color: #E67B7B;
             color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 1em;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 183, 161, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
-        .schedule-card button:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
+        .back-btn:hover {
+            background-color: rgba(255, 163, 138, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 183, 161, 0.4);
         }
 
-        /* Small Touches */
-        .container p {
-            text-align: center;
-        }
-
-        .schedule-card button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-        .note {
-            margin-top: 20px;
-            font-size: 1em;
-            color: #f44336;
-            text-align: center;
-        }
     </style>
     <script>
         function confirmBooking(button) {
@@ -248,7 +267,7 @@ $schedules_result = $stmt_schedules->get_result();
         </form>
 
     </div>
-    <a href="../dashboard/dashboard.php" class="back-btn">Back to Dashboard</a>
+    <a href="../dashboard/dashboard.php" class="back-btn" style = "color: white !important; margin-bottom: 15px;">Back to Dashboard</a>
 
 </body>
 </html>

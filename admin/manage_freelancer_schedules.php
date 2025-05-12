@@ -93,168 +93,80 @@ if (isset($_SESSION['message'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Manage Freelancer Schedule</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f4f7f9;
-            margin: 0;
-            padding: 0;
-        }
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;300;400;500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/manage_freelancer_schedules.css">
 
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        h2, h3 {
-            color: #1a73e8;
-        }
-
-        form {
-            margin-bottom: 30px;
-        }
-
-        label {
-            font-weight: bold;
-            display: block;
-            margin-top: 10px;
-        }
-
-        input[type="date"],
-        input[type="time"],
-        button {
-            padding: 8px;
-            width: 100%;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-
-        button {
-            margin-top: 15px;
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #125ccc;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        th, td {
-            padding: 12px;
-            border: 1px solid #e0e0e0;
-            text-align: center;
-        }
-
-        th {
-            background-color: #e8f0fe;
-        }
-
-        .action-btn {
-            display: inline-block;
-            padding: 6px 12px;
-            font-size: 14px;
-            border-radius: 5px;
-            margin: 2px;
-        }
-
-        .edit-btn {
-            background-color: #fbbc04;
-            color: white;
-            border: none;
-        }
-
-        .delete-btn {
-            background-color: #ea4335;
-            color: white;
-            border: none;
-        }
-
-        .save-btn {
-            background-color: #34a853;
-            color: white;
-            border: none;
-        }
-
-        .message {
-            color: red;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
 <body>
 
-<div class="container">
-    <a href="../admin/freelancer_dashboard.php">← Back to Dashboard</a>
-    <h2>Manage Your Freelancer Schedule</h2>
+    <div class="peach-blob peach-blob-1"></div>
+    <div class="peach-blob peach-blob-2"></div>
 
-    <?php if (!empty($message)) echo "<div class='message'>$message</div>"; ?>
+    <div class="overlay-container">
+        <div class="glass-header">
+            <h2><i class="far fa-calendar-alt"></i> Manage Your Schedule</h2>
+        </div>
 
-    <form method="POST">
-        <label>Date:</label>
-        <input type="date" name="date" min="<?= date('Y-m-d') ?>" required>
-        <label>Start Time:</label>
-        <input type="time" name="start_time" required>
-        <label>End Time:</label>
-        <input type="time" name="end_time" required>
-        <button type="submit">Add Schedule</button>
-    </form>
+        <?php if (!empty($message)) echo "<div class='message'>$message</div>"; ?>
 
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Start-End</th>
-            <th>Actions</th>
-        </tr>
-        <?php foreach ($schedules as $schedule): ?>
+        <form method="POST">
+            <label>Date:</label>
+            <input type="date" name="date" min="<?= date('Y-m-d') ?>" required>
+            <label>Start Time:</label>
+            <input type="time" name="start_time" required>
+            <label>End Time:</label>
+            <input type="time" name="end_time" required>
+            <button type="submit" class="btn btn-add"><i class="fas fa-plus"></i> Add Schedule</button>
+        </form>
+
+        <table>
             <tr>
-                <?php if (isset($_GET['edit']) && $_GET['edit'] == $schedule['id']): ?>
-                    <form method="POST">
-                        <td>
-                            <input type="date" name="edit_date" value="<?= htmlspecialchars($schedule['date']) ?>" min="<?= date('Y-m-d') ?>" required>
-                        </td>
-                        <td>
-                            <input type="time" name="edit_start_time" value="<?= htmlspecialchars($schedule['start_time']) ?>" required>
-                            to
-                            <input type="time" name="edit_end_time" value="<?= htmlspecialchars($schedule['end_time']) ?>" required>
-                        </td>
-                        <td>
-                            <input type="hidden" name="edit_id" value="<?= $schedule['id'] ?>">
-                            <button type="submit" class="action-btn save-btn">Save</button>
-                            <a href="manage_freelancer_schedules.php" class="action-btn delete-btn">Cancel</a>
-                        </td>
-                    </form>
-                <?php else: ?>
-                    <td><?= date("F j, Y", strtotime($schedule['date'])) ?></td>
-                    <td><?= date("g:i A", strtotime($schedule['start_time'])) ?> - <?= date("g:i A", strtotime($schedule['end_time'])) ?></td>
-                    <td>
-                        <a href="manage_freelancer_schedules.php?edit=<?= $schedule['id'] ?>" class="action-btn edit-btn">Edit</a>
-                        <form method="POST" style="display:inline;">
-                            <input type="hidden" name="delete" value="<?= $schedule['id'] ?>">
-                            <button type="submit" class="action-btn delete-btn" onclick="return confirm('Are you sure?')">Delete</button>
-                        </form>
-                    </td>
-                <?php endif; ?>
+                <th>Date</th>
+                <th>Start-End</th>
+                <th>Actions</th>
             </tr>
-        <?php endforeach; ?>
-    </table>
-</div>
+            <?php foreach ($schedules as $schedule): ?>
+                <tr>
+                    <?php if (isset($_GET['edit']) && $_GET['edit'] == $schedule['id']): ?>
+                        <form method="POST">
+                            <td>
+                                <input type="date" name="edit_date" value="<?= htmlspecialchars($schedule['date']) ?>" min="<?= date('Y-m-d') ?>" required>
+                            </td>
+                            <td>
+                                <input type="time" name="edit_start_time" value="<?= htmlspecialchars($schedule['start_time']) ?>" required>
+                                <span>to</span>
+                                <input type="time" name="edit_end_time" value="<?= htmlspecialchars($schedule['end_time']) ?>" required>
+                            </td>
+                            <td>
+                                <input type="hidden" name="edit_id" value="<?= $schedule['id'] ?>">
+                                <button type="submit" class="btn btn-save"><i class="fas fa-save"></i> Save</button>
+                                <a href="manage_freelancer_schedules.php" class="btn btn-cancel"><i class="fas fa-times"></i> Cancel</a>
+                            </td>
+                        </form>
+                    <?php else: ?>
+                        <td><?= date("F j, Y", strtotime($schedule['date'])) ?></td>
+                        <td><?= date("g:i A", strtotime($schedule['start_time'])) ?> - <?= date("g:i A", strtotime($schedule['end_time'])) ?></td>
+                        <td>
+                            <a href="manage_freelancer_schedules.php?edit=<?= $schedule['id'] ?>" class="btn btn-edit"><i class="fas fa-edit"></i> Edit</a>
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="delete" value="<?= $schedule['id'] ?>">
+                                <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure?')"><i class="fas fa-trash-alt"></i> Delete</button>
+                            </form>
+                        </td>
+                    <?php endif; ?>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+
+        <div class="btn-back">
+            <a href="../admin/freelancer_dashboard.php"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+    </div>
 
 </body>
 </html>

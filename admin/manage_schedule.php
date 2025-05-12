@@ -14,11 +14,23 @@ $message = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle DELETE
     if (isset($_POST['delete'])) {
-        $id = $_POST['delete'];
-        $stmt = $conn->prepare("DELETE FROM company_schedules WHERE id = ? AND company_id = ?");
-        $stmt->bind_param("ii", $id, $company_id);
-        $stmt->execute();
-    } 
+    $id = $_POST['delete'];
+
+    // First delete any related bookings
+    $stmt = $conn->prepare("DELETE FROM bookings WHERE schedule_id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+
+    // Then delete the schedule itself
+    $stmt = $conn->prepare("DELETE FROM company_schedules WHERE id = ? AND company_id = ?");
+    $stmt->bind_param("ii", $id, $company_id);
+    $stmt->execute();
+
+    $_SESSION['message'] = "Schedule and related bookings successfully deleted.";
+    header("Location: manage_schedule.php");
+    exit();
+}
+
     // Handle EDIT
     elseif (isset($_POST['edit_id'])) {
         $id = $_POST['edit_id'];
@@ -85,108 +97,106 @@ if (isset($_SESSION['message'])) {
 <head>
     <meta charset="UTF-8">
     <title>Manage Schedule</title>
-    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="stylesheet" href="../assets/manage_schedules.css">
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f4f7f9;
-            margin: 0;
-            padding: 0;
-        }
+       
+      
+.btn {
+    padding: 10px 16px;
+    border-radius: 30px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
 
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 
-        h2, h3 {
-            color: #1a73e8;
-        }
+.btn-add {
+    background-color: rgba(230, 123, 123, 0.9);
+    color: white;
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+}
 
-        form {
-            margin-bottom: 30px;
-        }
+.btn-add:hover {
+    background-color: rgba(212, 106, 106, 0.9);
+    box-shadow: 0 4px 12px rgba(230, 123, 123, 0.3);
+}
 
-        label {
-            font-weight: bold;
-            display: block;
-            margin-top: 10px;
-        }
+.btn-edit {
+    background-color: rgba(251, 188, 4, 0.9);
+    color: white;
+}
 
-        input[type="date"],
-        input[type="time"],
-        button {
-            padding: 8px;
-            width: 100%;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
+.btn-edit:hover {
+    background-color: rgba(230, 170, 0, 0.9);
+    box-shadow: 0 4px 12px rgba(251, 188, 4, 0.3);
+}
 
-        button {
-            margin-top: 15px;
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+.btn-delete {
+    background-color: rgba(234, 67, 53, 0.9);
+    color: white;
+}
 
-        button:hover {
-            background-color: #125ccc;
-        }
+.btn-delete:hover {
+    background-color: rgba(210, 50, 40, 0.9);
+    box-shadow: 0 4px 12px rgba(234, 67, 53, 0.3);
+}
+/* Save button */
+.save-btn {
+    background-color: #28a745;
+    color: white;
+}
+.save-btn:hover {
+    background-color: #218838;
+}
+.dashboard-btn {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
+.dashboard-btn:hover {
+    background-color: #5a6268;
+}
+.btn-save {
+    background-color: rgba(52, 168, 83, 0.9);
+    color: white;
+}
 
-        th, td {
-            padding: 12px;
-            border: 1px solid #e0e0e0;
-            text-align: center;
-        }
+.btn-save:hover {
+    background-color: rgba(40, 140, 70, 0.9);
+    box-shadow: 0 4px 12px rgba(52, 168, 83, 0.3);
+}
 
-        th {
-            background-color: #e8f0fe;
-        }
+.btn-cancel {
+    background-color: rgba(108, 117, 125, 0.9);
+    color: white;
+}
 
-        .action-btn {
-            display: inline-block;
-            padding: 6px 12px;
-            font-size: 14px;
-            border-radius: 5px;
-            margin: 2px;
-        }
+.btn-cancel:hover {
+    background-color: rgba(90, 98, 104, 0.9);
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
 
-        .edit-btn {
-            background-color: #fbbc04;
-            color: white;
-            border: none;
-        }
 
-        .delete-btn {
-            margin-top: 50px;
-            background-color: #ea4335;
-            color: white;
-            border: none;
-        }
-
-        .save-btn {
-            background-color: #34a853;
-            color: white;
-            border: none;
-        }
-
-        .message {
-            color: red;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
@@ -220,7 +230,7 @@ if (isset($_SESSION['message'])) {
         <?php foreach ($schedules as $schedule): ?>
             <tr>
                 <?php if (isset($_GET['edit']) && $_GET['edit'] == $schedule['id']): ?>
-                    <form method="POST">
+                    <form class = "formcal"method="POST">
                         <td>
                             <input type="date" name="edit_date" value="<?= htmlspecialchars($schedule['date']) ?>" min="<?= date('Y-m-d') ?>" required>
                         </td>
@@ -231,26 +241,32 @@ if (isset($_SESSION['message'])) {
                         </td>
                         <td>
                             <input type="hidden" name="edit_id" value="<?= $schedule['id'] ?>">
-                            <button type="submit" class="action-btn save-btn">Save</button>
-                            <a href="manage_schedule.php" class="action-btn delete-btn">Cancel</a>
+                            <button type="submit" class="btn btn-save">Save</button>
+                            <a href="manage_schedule.php" class="btn btn-cancel">Cancel</a>
                         </td>
                     </form>
                 <?php else: ?>
                     <td><?= date("F j, Y", strtotime($schedule['date'])) ?></td>
                     <td><?= date("g:i A", strtotime($schedule['start_time'])) ?> - <?= date("g:i A", strtotime($schedule['end_time'])) ?></td>
                     <td>
-                        <a href="manage_schedule.php?edit=<?= $schedule['id'] ?>" class="action-btn edit-btn">Edit</a>
+                     
+                        <a href="manage_schedule.php?edit=<?= $schedule['id'] ?>" class="btn btn-edit">Edit</a>
+                
+             
                         <form method="POST" style="display:inline;">
                             <input type="hidden" name="delete" value="<?= $schedule['id'] ?>">
-                            <button type="submit" class="action-btn delete-btn" onclick="return confirm('Are you sure?')">Delete</button>
+                            <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure?')">Delete</button>
                         </form>
+
+                       
+             
                     </td>
                 <?php endif; ?>
             </tr>
         <?php endforeach; ?>
     </table>
 
-    <a href="dashboard.php">Back to Dashboard</a>
+    <a href="dashboard.php" class="dashboard-btn">←Back to Dashboard</a>
 </div>
 
 

@@ -72,23 +72,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Edit Post</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;300;400;500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/edit_freelancer_post.css">
 </head>
 <body>
 
-<h2>Edit Post</h2>
+    <div class="peach-blob peach-blob-1"></div>
+    <div class="peach-blob peach-blob-2"></div>
 
-<form method="POST" enctype="multipart/form-data">
-    <label>Caption:</label><br>
-    <textarea name="caption" rows="4" cols="50"><?php echo htmlspecialchars($post['caption']); ?></textarea><br><br>
-
-    <label>Change Media (optional):</label><br>
-    <input type="file" name="media"><br><br>
-
-    <button type="submit">Update Post</button>
-</form>
-
-<br>
-<a href="freelancer_dashboard.php">Back to Dashboard</a>
+    <div class="overlay-container">
+        <h1>Edit Post</h1>
+        
+        <form method="POST" enctype="multipart/form-data">
+            <textarea name="caption" required placeholder="Share your thoughts..."><?php echo htmlspecialchars($post['caption']); ?></textarea>
+            
+            <div class="file-input-container">
+                <label class="file-input-label">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>Click to change media (images or videos)</span>
+                    <input type="file" name="media" accept="image/*, video/*">
+                </label>
+            </div>
+            
+            <?php if ($post['media_path']): ?>
+                <p style="text-align: center; margin-top: 10px;">
+                    <small>Current media: <?php echo basename($post['media_path']); ?></small>
+                </p>
+            <?php endif; ?>
+            
+            <button type="submit" class="btn btn-submit"><i class="fas fa-save"></i> Update Post</button>
+        </form>
+        
+        <a href="freelancer_dashboard.php" style="display: block; text-align: center; margin-top: 20px; color: #E67B7B; text-decoration: none;">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
 
 </body>
 </html>

@@ -94,67 +94,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../assets/styles.css">
-    <style>
-        .error-box {
-            background-color: #ffdddd;
-            color: #d8000c;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            text-align: center;
-            font-size: 14px;
-        }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/login.css">
 
-        .login-container {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .login-container input,
-        .login-container button {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-
-        .password-container {
-            position: relative;
-            width: 100%;
-        }
-
-        .password-container input[type="password"],
-        .password-container input[type="text"] {
-            width: 80%;
-            padding-right: 40px;
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: -100px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
-
-        .login-container button {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .login-container button:hover {
-            background-color: #218838;
-        }
-    </style>
     <script>
         function togglePassword() {
             const passwordInput = document.getElementById('password');
@@ -164,26 +106,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 
-    <div class="login-container">
-        <h2>Login</h2>
-
-        <?php if (!empty($error)): ?>
-            <div class="error-box"><?php echo $error; ?></div>
-        <?php endif; ?>
-
-        <form action="login.php" method="POST">
-            <input type="email" name="email" placeholder="Email" required>
-
-            <div class="password-container">
-                <input type="password" id="password" name="password" placeholder="Password" required>
-                <input type="checkbox" class="toggle-password" onclick="togglePassword()" title="Show Password">
-            </div>
-
-            <button type="submit">Login</button>
-        </form>
-
-        <p>Don't have an account? <a href="register.php">Register here</a>.</p>
+<div class="login-container">
+    <div class="login-symbol">
+        <!-- You can replace this with an image or any icon you prefer -->
+        <img src="../assets/IMAGES/SYMBOL.png" alt="Logo" style="width: 250px; height: 100px;">
     </div>
+    <h2>Login</h2>
+
+    <?php if (!empty($error)): ?>
+        <div class="error-box"><?php echo $error; ?></div>
+    <?php endif; ?>
+
+    <form action="login.php" method="POST">
+    <label for="email" style="float: center; margin-top: 10px;">EMAIL ADDRESS</label>
+<input type="email" id="email" name="email" required>
+
+<label for="password" style="float: Center; margin-top: 10px;">PASSWORD</label>
+<div class="password-container">
+    <input type="password" id="password" name="password" required>
+    <i class="fa fa-eye toggle-password" onclick="togglePassword()"></i>
+</div>
+
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p>Don't have an account? <a href="register.php">Register here</a>.</p>
+</div>
+
 
 </body>
 </html>

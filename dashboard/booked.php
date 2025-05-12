@@ -83,99 +83,17 @@ $freelancer_result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Booked Appointments</title>
-    <link rel="stylesheet" href="../assets/styles.css">
-    <style>
-        /* Global Styling */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f7fa;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
+    <title>My Booked Appointments</title>   
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/booked.css">
 
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 40px;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #4CAF50;
-            font-size: 2em;
-            margin-bottom: 30px;
-        }
-
-        h3 {
-            margin-bottom: 15px;
-            font-size: 1.5em;
-            color: #333;
-        }
-
-        /* Appointments Table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        .status-pending {
-            color: orange;
-        }
-
-        .status-completed {
-            color: green;
-        }
-
-        .status-cancelled {
-            color: red;
-        }
-
-        .message {
-            color: #FF5733;
-            text-align: center;
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-
-        .cancel-btn {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .cancel-btn:hover {
-            background-color: #d32f2f;
-        }
-    </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="peach-blob peach-blob-1"></div>
+    <div class="peach-blob peach-blob-2"></div>
+
+    <div class="overlay-container">
         <h1>My Booked Appointments</h1>
 
         <?php if (isset($message)): ?>
@@ -210,7 +128,7 @@ $freelancer_result = $stmt->get_result();
                                 <?php if ($row['status'] == 'pending'): ?>
                                     <a href="?cancel_id=<?php echo $row['id']; ?>" class="cancel-btn" onclick="return confirm('Are you sure you want to cancel this appointment?')">Cancel</a>
                                 <?php else: ?>
-                                    N/A
+                                    <span style="color: #AAA;">N/A</span>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -249,7 +167,7 @@ $freelancer_result = $stmt->get_result();
                                 <?php if ($row['status'] == 'pending'): ?>
                                     <a href="?cancel_id=<?php echo $row['id']; ?>" class="cancel-btn" onclick="return confirm('Are you sure you want to cancel this appointment?')">Cancel</a>
                                 <?php else: ?>
-                                    N/A
+                                    <span style="color: #AAA;">N/A</span>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -260,8 +178,8 @@ $freelancer_result = $stmt->get_result();
             <p class="message">You have no booked appointments with freelancers yet.</p>
         <?php endif; ?>
 
+        <a href="dashboard.php" class="back-btn">Back to Dashboard</a>
     </div>
-    <a href="dashboard.php" class="back-btn">Back to Dashboard</a>
 
 </body>
 </html>

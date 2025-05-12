@@ -75,43 +75,61 @@ if (isset($_GET['id'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Freelance Package</title>
-    <link rel="stylesheet" href="../assets/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;300;400;500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/edit_freelance_package.css">
 </head>
 <body>
 
-<div class="container">
-    <h1>Edit Freelance Package</h1>
-    <form method="POST" action="edit_freelance_package.php?id=<?php echo $package['id']; ?>" enctype="multipart/form-data">
-        <label for="package_name">Package Name:</label>
-        <input type="text" id="package_name" name="package_name" value="<?php echo htmlspecialchars($package['name']); ?>" required><br><br>
+    <div class="peach-blob peach-blob-1"></div>
+    <div class="peach-blob peach-blob-2"></div>
 
-        <label for="package_details">Package Details:</label>
-        <textarea id="package_details" name="package_details" required><?php echo htmlspecialchars($package['details']); ?></textarea><br><br>
-
-        <label for="package_inclusions">Package Inclusions:</label>
-        <textarea id="package_inclusions" name="package_inclusions" required><?php echo htmlspecialchars($package['inclusions']); ?></textarea><br><br>
-
-        <label for="package_price">Package Price (PHP):</label>
-        <input type="number" id="package_price" name="package_price" value="<?php echo $package['price']; ?>" required><br><br>
-
-        <label for="package_image">Package Image:</label>
-        <input type="file" id="package_image" name="package_image" accept="image/*"><br><br>
+    <div class="overlay-container">
+        <h1>Edit Freelance Package</h1>
         
-        <?php if ($package['image']): ?>
-            <img src="../<?php echo $package['image']; ?>" alt="Current Package Image" style="width: 100px; height: auto;"><br><br>
-        <?php endif; ?>
+        <form method="POST" action="edit_freelance_package.php?id=<?php echo $package['id']; ?>" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="package_name">Package Name:</label>
+                <input type="text" id="package_name" name="package_name" value="<?php echo htmlspecialchars($package['name']); ?>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="package_details">Package Details:</label>
+                <textarea id="package_details" name="package_details" required><?php echo htmlspecialchars($package['details']); ?></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="package_inclusions">Package Inclusions:</label>
+                <textarea id="package_inclusions" name="package_inclusions" required><?php echo htmlspecialchars($package['inclusions']); ?></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="package_price">Package Price (PHP):</label>
+                <input type="number" id="package_price" name="package_price" value="<?php echo $package['price']; ?>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="package_image">Package Image:</label>
+                <input type="file" id="package_image" name="package_image" accept="image/*">
+                
+                <?php if ($package['image']): ?>
+                    <div class="current-image">
+                        <p>Current Image:</p>
+                        <img src="../<?php echo $package['image']; ?>" alt="Current Package Image">
+                    </div>
+                <?php endif; ?>
+            </div>
+            
+            <button type="submit" class="btn-submit">Update Package</button>
+        </form>
 
-        <button type="submit">Update Package</button>
-    </form>
-
-    <br>
-    <a href="view_freelance_packages.php">Back to Packages</a>
-
-    <br><br>
-    <a href="freelancer_dashboard.php"><button>Back to Dashboard</button></a>
-</div>
+        <div class="action-links">
+            <a href="view_freelance_packages.php" class="back-link">Back to Packages</a>
+            <a href="freelancer_dashboard.php" class="back-link">Back to Dashboard</a>
+        </div>
+    </div>
 
 </body>
 </html>
