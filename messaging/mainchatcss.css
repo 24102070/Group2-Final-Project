@@ -84,7 +84,7 @@
   background-color: #3cd760a1;
   max-width: max-content;
   margin-left: auto;
-  border-radius: 10%;
+  border-radius: 15px;
   padding: 5px;
 }
 .message-other-message {
@@ -92,7 +92,7 @@
   background-color: #6b69695e;
   max-width: max-content;
   margin-right: auto;
-  border-radius: 10%;
+  border-radius: 15px;
   padding: 5px;
 }
 .messages-input {

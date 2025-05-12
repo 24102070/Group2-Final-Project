@@ -42,7 +42,8 @@ if (!empty($searchTerm)) {
     if ($result->num_rows > 0) {
         echo "<ul>";
         while ($row = $result->fetch_assoc()) {
-            echo "<li class='search-result' data-id='" . $row['id'] . "' data-name='" . htmlspecialchars($row['name']) . "' data-type='" . $row['type'] . "' data-user-type='" . $row['user_type'] . "' onclick='openChatWindow(this)'>
+            echo "<li class='search-result' data-id='" . $row['id'] . "' data-name='" . htmlspecialchars($row['name'])
+            . "' data-type='" . $row['type'] . "' data-user-type='" . $row['user_type'] . "' onclick='openChatWindow(this)'>
             <strong>" . htmlspecialchars($row['name']) . "</strong> (" . $row['type'] . ")
             </li>";
         }
@@ -52,8 +53,6 @@ if (!empty($searchTerm)) {
     }
 
     $stmt->close();
-} else {
-    echo "Please enter a search term.";
 }
 
 $conn->close();
@@ -95,21 +94,27 @@ $conn->close();
         </div>
         <!-- Sidebar -->
         <div class="chatbar">
-            <form class="form" method="GET" action="">
-                <button>
-                    <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
-                        <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
+            <div class="direct-messages">
+                <form class="form" method="GET" action="">
+                    <button>
+                        <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+                            <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
 
-                <input class="input" placeholder="Search users..." required="" type="text" name="search">
+                    <input class="input" placeholder="Search users..." required="" type="text" name="search">
 
-                <button class="reset" type="reset">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </form>
+                    <button class="reset" type="reset">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </form>
+                <div class="users-chats">
+
+                </div>
+            </div>
+            
 
             <div class="separator"></div>
             <div class="direct-messages">
@@ -129,7 +134,7 @@ $conn->close();
                         </form>
                     <div class="freelancer-chats">
                         <!-- <div class="conversation-card" onclick="">
-                            <div class="profile-picture" style="background-image: url('ian_profile.jfif');"></div>
+                             <div class="profile-picture" style="background-image: url('ian_profile.jfif');"></div>
                             <div class="message-content">
                                 <div class="search-results">
                                     <?= $searchResults = '' ?>
@@ -254,6 +259,7 @@ $conn->close();
             </div>
         </div>
     </div>
+    <script src="userjs/users.js" defer></script>
     <script src="userjs/usersFreelancers.js" defer></script>
     <script src="userjs/usersCompanies.js" defer></script>
     <script src="userjs/search.js" defer></script>
@@ -266,8 +272,11 @@ $conn->close();
     function openChatWindow(element) {
         // Get data attributes from the clicked result
         const recipientId = element.getAttribute('data-id');
+        console.log (recipientId);
         const recipientName = element.getAttribute('data-name');
+        console.log(recipientName);
         const recipientType = element.getAttribute('data-type');
+        console.log(recipientType);
         const recipientUserType = element.getAttribute('data-user-type');
 
         // Store the selected recipient ID and type

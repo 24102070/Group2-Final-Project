@@ -2,6 +2,11 @@
 session_start();
 include_once("../../config/db.php");
 
+$searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
+$recipient_id = isset($_GET['recipient_id']) ? $_GET['recipient_id'] : null;
+$recipient_name = isset($_GET['name']) ? $_GET['name'] : null;
+$recipient_type = isset($_GET['type']) ? $_GET['type'] : null;
+
 // Fetch freelancer profiles
 $sql = mysqli_query($conn, "SELECT * FROM freelancer_profiles");
 $freelancer_profiles = mysqli_fetch_all($sql, MYSQLI_ASSOC);  // Fetch all rows as an associative array
@@ -27,7 +32,8 @@ if (count($freelancers) == 0) {
 
         if ($freelancer) {
             $output .= '
-                <div class="conversation-card" onclick="">
+                <div class="conversation-card" data-id="' . $freelancer['id'] . '"data-name="' . htmlspecialchars($freelancer['name']) . '"
+                data-type="Freelancer"data-user-type="freelancer"onclick="openChatWindow(this)">
                     <div class="profile-picture" style="background-image: url(\'' . $photo . '\');"></div>
                     <div class="message-content">
                         <div class="username">' . htmlspecialchars($freelancer['name']) . '<div class="on-status"></div></div>

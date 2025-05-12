@@ -39,9 +39,12 @@
 }
 .direct-messages {
   width: 50vh;
+  height: 33vh; /* Set your desired height */
+  overflow-y: auto;
 }
 .group-chats {
-  height: 35vh;
+  height: 33vh; /* Set your desired height */
+  overflow-y: auto;
 }
 .message-content {
   cursor: pointer;

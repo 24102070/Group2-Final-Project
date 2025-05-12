@@ -26,7 +26,8 @@ if (count($company_profiles) == 0) {
             $photo = !empty($profile['profile_photo']) ? $profile['profile_photo'] : 'images/default-profile.png';
 
             $output .= '
-                <div class="conversation-card" onclick="">
+                    <div class="conversation-card" data-id="' . $company['id'] . '"data-name="' . htmlspecialchars($company['name']) . '"
+                     data-type="Company" data-user-type="company" onclick="openChatWindow(this)">
                     <div class="profile-picture" style="background-image: url(\'../' . $photo . '\');"></div>
                     <div class="message-content">
                         <div class="username">' . $company['name'] . '<div class="on-status"></div></div>
