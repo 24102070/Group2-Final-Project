@@ -1,0 +1,91 @@
+.conversation-card {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff00;
+  border-radius: 10px;
+  margin-top: 10px;
+  width: 275px;
+  transition: background-color 0.2s ease;
+}
+
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #0aa32e;
+  background-size: cover;
+  background-position: center;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.on-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #00ff3c94;
+}
+.off-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #808380a6;
+}
+.dnd-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ef6767;
+}
+.direct-messages {
+  width: 50vh;
+}
+.group-chats {
+  height: 35vh;
+}
+.message-content {
+  cursor: pointer;
+  flex-grow: 1;
+}
+.cards_messages_container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: 80%;
+  overflow-y: auto;
+  transition: all 0.9s ease-in-out;
+}
+.conversation-card:hover {
+  background-color: #00000055;
+  border-radius: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.username {
+  width: max-content;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  min-width: none;
+  max-width: 210px; /* or any width that fits your layout */
+  text-overflow: ellipsis;
+}
+
+.timestamp {
+  color: #72767d;
+  font-size: 12px;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  margin-top: 5px;
+  color: #000000;
+  justify-content: space-between;
+}

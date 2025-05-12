@@ -217,7 +217,10 @@ $cover_photo = !empty($company['cover_photo']) ? "../" . $company['cover_photo']
         <a href="add_package.php">Add Package</a> |
         <a href="create_post.php">Create Post</a> |
         <a href="browse_freelancers.php">Connect and Browse</a> |
+        <a href="../messaging/messaging.php">Messages</a> |
+
         <a href="../auth/logout.php">Logout</a>
+        <?php echo $_SESSION['user_id'] ?> <!--DEBUG-->
     </div>
 
     <hr>

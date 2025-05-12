@@ -184,7 +184,10 @@ $cover_photo = !empty($freelancer['cover_photo']) ? "../" . $freelancer['cover_p
     <a href="add_package_freelancer.php">Add Package</a> |
     <a href="create_freelancer_post.php">Create Post</a> |
     <a href="browse_companies.php">Connect and Browse</a> |
+    <a href="../messaging/messaging.php">Messages</a> |
+
     <a href="../auth/logout.php">Logout</a>
+    
 </div>
 
 <hr>
@@ -206,6 +209,7 @@ $cover_photo = !empty($freelancer['cover_photo']) ? "../" . $freelancer['cover_p
     <p><strong>About Me:</strong> <?php echo nl2br(htmlspecialchars($freelancer['about'])); ?></p>
     <p><strong>Contact:</strong> <?php echo htmlspecialchars($freelancer['contact']); ?></p>
     <p><strong>Minimum Fee:</strong> PHP <?php echo number_format($freelancer['minimum_fee'], 2); ?></p>
+    
 </div>
 
 <!-- Packages -->
