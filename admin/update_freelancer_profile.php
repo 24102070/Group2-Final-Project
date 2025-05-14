@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label>About Me:</label><br>
             <textarea name="about" required><?php echo $freelancer['about'] ?? ''; ?></textarea><br>
 
-            <label>Contact:</label><br>
+            <label>Contact Information and Address:</label><br>
             <input type="text" name="contact" value="<?php echo $freelancer['contact'] ?? ''; ?>" required><br>
 
             <button type="submit" class="btn btn-submit"><i class="fas fa-save"></i> Update Profile</button>

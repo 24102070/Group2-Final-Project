@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label>About Us</label>
             <textarea name="about" placeholder="Tell clients about your company..." required><?php echo $company['about'] ?? ''; ?></textarea>
 
-            <label>Contact Information</label>
+            <label>Contact Information and Address</label>
             <input type="text" name="contact" placeholder="Email, phone, or other contact details" value="<?php echo $company['contact'] ?? ''; ?>" required>
 
             <label>Minimum Fee ($)</label>

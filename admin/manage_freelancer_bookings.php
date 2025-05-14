@@ -25,6 +25,33 @@ if (isset($_GET['action']) && isset($_GET['booking_id'])) {
     }
 }
 
+// Handle delete booking
+if (isset($_GET['delete_booking_id'])) {
+    $delete_booking_id = $_GET['delete_booking_id'];
+    $query = "DELETE FROM freelancer_bookings WHERE id = ? AND freelancer_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('ii', $delete_booking_id, $freelancer_id);
+    $stmt->execute();
+
+    header("Location: manage_freelancer_bookings.php");
+    exit();
+}
+
+// Handle status update to Ongoing/Done when changed in dropdown
+if (isset($_POST['update_status']) && isset($_POST['booking_id']) && isset($_POST['new_status'])) {
+    $booking_id = $_POST['booking_id'];
+    $new_status = $_POST['new_status'];
+
+    if ($new_status == 'ongoing' || $new_status == 'done') {
+        $query = "UPDATE freelancer_bookings SET status = ? WHERE id = ? AND freelancer_id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('sii', $new_status, $booking_id, $freelancer_id);
+        $stmt->execute();
+        header("Location: manage_freelancer_bookings.php");
+        exit();
+    }
+}
+
 // Fetch bookings related to this freelancer
 $sql = "
     SELECT fb.id, fb.user_id, fb.freelancer_id, fb.schedule_id, fb.status, fb.created_at, fb.package_id,
@@ -50,10 +77,21 @@ $result = $stmt->get_result();
     <meta charset="UTF-8">
     <title>Freelancer Bookings</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/manage_booking.css">
-    
+    <style>
+        .btn-delete {
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 2px;
+            color: white;
+            text-decoration: none;
+        }
+       
+        .btn-delete { background-color: #e74c3c; }
+        
+    </style>
 </head>
 <body>
     <div class="container">
@@ -68,6 +106,7 @@ $result = $stmt->get_result();
                     <th>Schedule</th>
                     <th>Status</th>
                     <th>Action</th>
+                    <th>Delete</th> <!-- New column for delete action -->
                 </tr>
             </thead>
             <tbody>
@@ -88,9 +127,24 @@ $result = $stmt->get_result();
                             <?php if ($row['status'] === 'pending'): ?>
                                 <a href="?action=accept&booking_id=<?= $row['id'] ?>" class="btn btn-accept"> <i class="fas fa-check-circle"></i>Accept</a>
                                 <a href="?action=reject&booking_id=<?= $row['id'] ?>" class="btn btn-reject"> <i class="fas fa-times-circle"></i>Reject</a>
+                            <?php elseif ($row['status'] === 'accept'): ?>
+                                <!-- Dropdown to change status if booking is accepted -->
+                                <form method="POST" action="manage_freelancer_bookings.php">
+                                    <input type="hidden" name="booking_id" value="<?= $row['id'] ?>">
+                                    <select name="new_status" onchange="this.form.submit()">
+                                        <option value="ongoing" <?= ($row['status'] == 'ongoing') ? 'selected' : '' ?>>Ongoing</option>
+                                        <option value="done" <?= ($row['status'] == 'done') ? 'selected' : '' ?>>Done</option>
+                                    </select>
+                                    <input type="hidden" name="update_status" value="true">
+                                </form>
                             <?php else: ?>
-                                No Action
+                                <span>Not Accepted</span>
                             <?php endif; ?>
+                        </td>
+                        <td> <!-- Delete column -->
+                            <a href="?delete_booking_id=<?= $row['id'] ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this booking?');">
+                                <i class="fas fa-trash-alt"></i>Delete
+                            </a>
                         </td>
                     </tr>
                 <?php endwhile; ?>

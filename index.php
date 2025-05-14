@@ -23,6 +23,11 @@ include 'config/db.php';
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    html, body{
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
 <body>
 
@@ -42,9 +47,9 @@ include 'config/db.php';
   </div>
 
   <ul class="nav-links" id="nav-links">
-    <li><a href="#">About Us</a></li>
-    <li><a href="#">Services</a></li>
-    <li><a href="#">Contact Us</a></li>
+    <li><a href="#stats">About Us</a></li>
+    <li><a href="#feat">Services</a></li>
+    <li><a href="#foot">Contact Us</a></li>
   </ul>
 
   <div class="nav-right">
@@ -97,7 +102,7 @@ include 'config/db.php';
 
 <!-- STATS SECTION -->
 <section class="stats-section">
-  <div class="stats-box">
+  <div class="stats-box" id = "stats">
     <img src="assets/IMAGES/HERO-STATS.png" alt="Statistics background">
     <div class="stats-content">
       <div class="stats-text">
@@ -133,7 +138,7 @@ include 'config/db.php';
     </div>
   </div>
 
-  <div class="featured-grid">
+  <div class="featured-grid" id = "feat">
     <h3>Featured Companies & Freelancers</h3>
     <div class="grid">
       <div class="card">
@@ -179,7 +184,7 @@ include 'config/db.php';
     </div>
 
     <!-- Quick Links -->
-    <div class="footer-section">
+    <div class="footer-section" id = "foot">
       <h3 class="footer-heading">Quick Links</h3>
       <ul class="footer-links">
         <li><a href="#">Home</a></li>

@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             
             <div class="button-group">
-                <a href="../dashboard.php" class="back-btn">
+                <a href="dashboard.php" class="back-btn">
                     <i class="fas fa-arrow-left"></i> Back to Dashboard
                 </a>
                 <button type="submit" class="submit-btn">
