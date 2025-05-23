@@ -17,7 +17,7 @@ font-family: 'Poppins', sans-serif;
     max-width: 400px;
     width: 100%;
     padding: 20px;
-    background: #fff;
+    background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center;
@@ -45,7 +45,7 @@ margin: 8px 0;
 border: none; /* Removed border */
 border-radius: 15px;
 font-size: 16px;
-background-color: #f0f0f0;
+background-color: #8c8c8c;
 color: #333;
 box-sizing: border-box;
 }
@@ -82,11 +82,7 @@ align-items: center;
 width: 100%;
 position: relative;
 }
-.login-container input:focus {
-outline: none;
-border-color: #28a745; /* Green border on focus */
-background-color: #fff; /* White background when focused */
-}
+
 .password-container input[type="password"],
 .password-container input[type="text"] {
 flex: 1;

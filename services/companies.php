@@ -365,7 +365,9 @@ $result = $conn->query($sql);
 
     <div class="overlay-container">
         <h1>Discover Exceptional Event Planners</h1>
-
+        <a href="../dashboard/dashboard.php" class="back-btn">
+            Back to Dashboard
+        </a>
         <div class="search-container">
             <input type="text" id="search-bar" class="search-bar" placeholder="Search for event planners...">
             <div class="search-icon"><i class="fas fa-search"></i></div>
@@ -405,9 +407,7 @@ $result = $conn->query($sql);
             <?php endif; ?>
         </div>
 
-        <a href="../dashboard/dashboard.php" class="back-btn">
-            Back to Dashboard
-        </a>
+        
     </div>
 
     <script>

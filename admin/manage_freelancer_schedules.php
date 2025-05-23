@@ -155,7 +155,7 @@ if (isset($_SESSION['message'])) {
                             <a href="manage_freelancer_schedules.php?edit=<?= $schedule['id'] ?>" class="btn btn-edit"><i class="fas fa-edit"></i> Edit</a>
                             <form method="POST" style="display:inline;">
                                 <input type="hidden" name="delete" value="<?= $schedule['id'] ?>">
-                                <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure?')"><i class="fas fa-trash-alt"></i> Delete</button>
+                                <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure?')"><i class="fas fa-trash-alt"></i> Remove</button>
                             </form>
                         </td>
                     <?php endif; ?>

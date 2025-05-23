@@ -18,7 +18,6 @@ include 'config/db.php';
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="assets/hompage.css" />
-  <link rel="stylesheet" href="assets/styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -27,6 +26,11 @@ include 'config/db.php';
     html, body{
       scroll-behavior: smooth;
     }
+
+    .login-container{
+      gap: 10px;
+    }
+    
   </style>
 </head>
 <body>
@@ -57,9 +61,11 @@ include 'config/db.php';
       <input type="text" placeholder="Search..." class="search-input">
       <button class="search-btn"><i class="fas fa-search"></i></button>
     </div>
-    <div class="login-container">
+    <div class="login-container" style = "background-color: white;">
   
-      <a href="auth/login.php" class="login-btn">Log In</a>
+      <a href="auth/login.php" class="login-btn">Sign in</a>
+       <a href="auth/register_company.php" class="login-btn">Company Site</a>
+        <a href="auth/register_freelancer.php" class="login-btn">Freelancer Site</a>
     </div>
   </div>
 </nav>
@@ -237,6 +243,62 @@ include 'config/db.php';
   </div>
 </footer>
 
+<!-- Scroll to Top Button -->
+<button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+  // Scroll to top 
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Show or hide the scroll button
+  window.onscroll = function () {
+    const btn = document.getElementById("scrollTopBtn");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+      btn.style.display = "block";
+    } else {
+      btn.style.display = "none";
+    }
+  };
+
+  // Scroll to top when any navbar link is clicked
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function () {
+      scrollToTop();
+    });
+  });
+</script>
+
+<style>
+  #scrollTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #f28585;
+    color: white;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+  }
+
+  #scrollTopBtn:hover {
+    background-color: #db6e6e;
+  }
+
+  #scrollTopBtn i {
+    font-size: 20px;
+  }
+</style>
 
 </body>
 </html>

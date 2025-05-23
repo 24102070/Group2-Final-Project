@@ -119,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <form action="login.php" method="POST">
     <label for="email" style="float: center; margin-top: 10px;">EMAIL ADDRESS</label>
-<input type="email" id="email" name="email" required>
+<input type="email" id="email" name="email" style = "background-color:rgba(234, 234, 234, 0.96);"required>
 
 <label for="password" style="float: Center; margin-top: 10px;">PASSWORD</label>
 <div class="password-container">
@@ -130,6 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <button type="submit">Login</button>
     </form>
+        <p><a href="forgot_password.php">Forgot your password?</a></p>
 
     <p>Don't have an account? <a href="register.php">Register here</a>.</p>
 </div>

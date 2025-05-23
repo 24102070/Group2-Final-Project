@@ -280,6 +280,79 @@ text-decoration: underline;
 color: #d46a6a;
 
 }
+  
+#sidebar {
+    background-color: rgba(230, 123, 123, 0.1);
+    color: #E67B7B !important;
+    padding: 20px;
+    border-radius: 35px;
+    min-height: 80%;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+#sidebar .sidebar-btn {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.3s ease, transform 0.2s;
+    cursor: pointer;
+}
+
+
+#sidebar .sidebar-btn.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+#sidebar .sidebar-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px);
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+    #sidebar {
+        flex: 0 0 60px !important; /* smaller width */
+        padding: 10px 5px;
+    }
+
+    #sidebar .sidebar-btn {
+        text-align: center;
+        padding: 10px 0;
+        font-size: 16px;
+    }
+
+    #sidebar .sidebar-btn i {
+        display: block;
+        font-size: 20px;
+    }
+
+    #sidebar .sidebar-btn::after,
+    #sidebar .sidebar-btn span,
+    #sidebar .sidebar-btn .text {
+        display: none !important; /* hide text */
+    }
+}
+
+
+
 
 
     </style>
@@ -311,8 +384,37 @@ color: #d46a6a;
         </div>
 
 <hr>
+<div class="container" id="sidebar-content-wrapper" style="display: flex; gap: 20px; margin-top: 30px;">
+    
+   <nav id="sidebar" style="flex: 0 0 200px; border: 1px solid #ccc; padding: 15px; border-radius: 5px;">
+    <div style="text-align: center; margin-bottom: 20px;">
+    <img src="<?php echo $profile_photo; ?>" alt="Company Logo" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #E67B7B;">
+</div>
+<p style="color: #E67B7B; font-size: 14px; margin-top: 10px; text-align: center;"><i class="fa-regular fa-calendar"></i>
+    <?php echo date("l, F j"); ?>
+</p>
+<hr style="border-top: 1px solid #E67B7B; margin: 20px 0;">
+<p style="text-align: center; color: #E67B7B; font-size: 12px;">Quick Access</p>
 
-<!-- Cover Photo -->
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            <li><button class="sidebar-btn active" data-target="profile-section" style="width: 100%; padding: 10px; border: none; background: none; cursor: pointer; font-weight: 600; font-size: 20px; text-align: left; color: #E67B7B "> <i class="fa-solid fa-user"></i> <span class="text">Profile</button></li>
+            <li><button class="sidebar-btn" data-target="package-section" style="width: 100%; padding: 10px; border: none; background: none; cursor: pointer; font-weight: 600; font-size: 20px; text-align: left; color: #E67B7B "><i class="fa-solid fa-box-open"></i><span class="text"> Package</button></li>
+            <li><button class="sidebar-btn" data-target="post-section" style="width: 100%; padding: 10px; border: none; background: none; cursor: pointer; font-weight: 600; font-size: 20px;text-align: left; color: #E67B7B "> <i class="fa-solid fa-pen-to-square"></i><span class="text">Post</button></li>
+        </ul>
+<br>
+<br>
+        <hr style="border-top: 1px solid #E67B7B; margin: 20px 0;">
+        <blockquote style="font-style: italic; color: #E67B7B; font-size: 12px; margin: 20px 0;">
+    “Creativity is intelligence having fun.” – Albert Einstein
+</blockquote>
+
+    </nav>
+
+  <!-- START: Content Area -->
+    <div id="content-area" style="flex: 1; padding: 15px; border-radius: 5px; max-width: 100%; overflow-x: auto;">
+<!-- START: Profile Content -->
+        <div id="profile-section" class="sidebar-content" style="display: block;">
+    <!-- Cover Photo -->
 <div>
     <img src="<?php echo $cover_photo; ?>" class="cover-photo">
 </div>
@@ -334,9 +436,11 @@ color: #d46a6a;
     </div>
 </div>
 
+
 <!-- Packages -->
+ <div id="package-section" class="sidebar-content" style="display: none;">
+    <h2 style="margin-top: 60px; font-family: 'Playfair Display', serif; color: #E67B7B;">Your Packages</h2>
 <div class="container">
-    <h2>My Packages</h2>
     <?php if ($result_packages->num_rows > 0): ?>
         <?php while ($package = $result_packages->fetch_assoc()): ?>
             <div class="package-card" style="background:#fff; padding:20px; margin-bottom:20px; border-radius:10px;">
@@ -380,10 +484,13 @@ color: #d46a6a;
         <p>No packages found.</p>
     <?php endif; ?>
 </div>
+    </div>
 
 <!-- Freelancer Posts -->
+ <div id="post-section" class="sidebar-content" style="display: none;">
+    <h2 style="margin-top: 60px; font-family: 'Playfair Display', serif; color: #E67B7B;">Your Posts</h2>
 <div class="container">
-    <h2>My Posts</h2>
+
     <?php if ($result_posts->num_rows > 0): ?>
         <?php while ($post = $result_posts->fetch_assoc()): ?>
             <div class="package-card">
@@ -410,6 +517,10 @@ color: #d46a6a;
         <p>No posts yet. <a href="create_freelancer_post.php">Create your first post</a>.</p>
     <?php endif; ?>
 </div>
+ </div>
+</div>
+    </div>
+
 
 <script>
 function toggleReviews(packageId) {
@@ -424,6 +535,24 @@ function toggleReviews(packageId) {
         btn.textContent = "View More";
     }
 }
+document.querySelectorAll('.sidebar-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        document.querySelectorAll('.sidebar-btn').forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        button.classList.add('active');
+
+        // Hide all content divs
+        document.querySelectorAll('.sidebar-content').forEach(content => content.style.display = 'none');
+
+        // Show the targeted content div
+        const target = button.getAttribute('data-target');
+        const targetDiv = document.getElementById(target);
+        if (targetDiv) {
+            targetDiv.style.display = 'block';
+        }
+    });
+});
 </script>
 
 </body>

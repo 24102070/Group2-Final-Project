@@ -57,7 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['schedule_id'])) {
                 $stmt = $conn->prepare($insert_sql);
                 $stmt->bind_param("iiii", $user_id, $freelancer_id, $schedule_id, $package_id);
                 if ($stmt->execute()) {
-                    $message = "Booking successful!";
+                    echo "<script>window.location.href = '../dashboard/booked.php';</script>";
+                        exit();
                 } else {
                     $message = "Failed to book the schedule. Try again.";
                 }
@@ -75,7 +76,11 @@ $result = $stmt->get_result();
 $freelancer = $result->fetch_assoc();
 
 // Fetch schedules for the freelancer
-$sql_schedules = "SELECT id, date, start_time, end_time FROM freelancer_schedules WHERE freelancer_id = ? ORDER BY date, start_time";
+$sql_schedules = "SELECT id, date, start_time, end_time 
+                  FROM freelancer_schedules 
+                  WHERE freelancer_id = ? AND date >= DATE_ADD(CURDATE(), INTERVAL 3 DAY) 
+                  ORDER BY date, start_time";
+
 $stmt_schedules = $conn->prepare($sql_schedules);
 $stmt_schedules->bind_param("i", $freelancer_id);
 $stmt_schedules->execute();
@@ -108,6 +113,7 @@ body {
     background-size: 200% 200%;
     animation: gradient 55s ease infinite;
     min-height: 100vh;
+    overflow-y: auto;
 }
 
 @keyframes gradient {
@@ -229,7 +235,9 @@ button:disabled {
 
 
     <div class="container">
+        
         <h1>Book a Schedule with <?php echo htmlspecialchars($freelancer['name']); ?></h1>
+         <a href="../dashboard/dashboard.php" class="back-btn" style = "color: white !important; margin-bottom: 15px;">Back to Dashboard</a>
 
         <?php if ($message): ?>
             <p class="message"><?php echo $message; ?></p>
@@ -239,6 +247,7 @@ button:disabled {
             <h3>Available Schedules</h3>
             <p class="note">Note: You can only book a schedule 3 days or more in advance.</p>
             <?php while ($schedule = $schedules_result->fetch_assoc()): ?>
+                 <form method="POST" onsubmit="return confirm('Are you sure you want to book?');" class="schedule-card">
                 <div class="schedule-card">
                     <div class="schedule-info">
                         <p><strong>Date:</strong> <?php echo date('l, F j, Y', strtotime($schedule['date'])); ?></p>
@@ -262,12 +271,13 @@ button:disabled {
                         </button>
                         <input type="hidden" name="schedule_id" value="<?php echo $schedule['id']; ?>">
                     <?php endif; ?>
+                    </form>
                 </div>
             <?php endwhile; ?>
         </form>
-
+<p class="note" style = "text-align: center;">Can't find a suitable schedule? Reach out to us via chat for assistance.</p>
+          <a href="../messaging/messaging.php" class="back-btn" style = "color:white !important;">Message Now!</a>
     </div>
-    <a href="../dashboard/dashboard.php" class="back-btn" style = "color: white !important; margin-bottom: 15px;">Back to Dashboard</a>
-
+   
 </body>
 </html>

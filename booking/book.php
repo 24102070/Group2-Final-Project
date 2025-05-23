@@ -57,7 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['schedule_id'])) {
                 $stmt = $conn->prepare($insert_sql);
                 $stmt->bind_param("iiii", $user_id, $company_id, $schedule_id, $package_id);
                 if ($stmt->execute()) {
-                    $message = "Booking successful!";
+                     echo "<script>window.location.href = '../dashboard/booked.php';</script>";
+                        exit();
                 } else {
                     $message = "Failed to book the schedule. Try again.";
                 }
@@ -75,7 +76,14 @@ $result = $stmt->get_result();
 $company = $result->fetch_assoc();
 
 // Fetch schedules for the company
-$sql_schedules = "SELECT id, date, start_time, end_time FROM company_schedules WHERE company_id = ? ORDER BY date, start_time";
+$sql_schedules = "
+    SELECT id, date, start_time, end_time 
+    FROM company_schedules 
+    WHERE company_id = ? 
+      AND DATE(date) >= CURDATE() + INTERVAL 3 DAY 
+    ORDER BY date ASC, start_time ASC
+";
+
 $stmt_schedules = $conn->prepare($sql_schedules);
 $stmt_schedules->bind_param("i", $company_id);
 $stmt_schedules->execute();
@@ -108,6 +116,7 @@ body {
     background-size: 200% 200%;
     animation: gradient 55s ease infinite;
     min-height: 100vh;
+    overflow-y: auto;
 }
 
 @keyframes gradient {
@@ -137,6 +146,7 @@ h1, h3 {
     font-style: italic;
     color: #9c6e60;
     margin-bottom: 25px;
+    text-align: center;
 }
 
 .message {
@@ -204,6 +214,7 @@ button:disabled {
             box-shadow: 0 4px 12px rgba(255, 183, 161, 0.3);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
+            margin-bottom: 20px;
         }
 
         .back-btn:hover {
@@ -226,44 +237,42 @@ button:disabled {
 
     <div class="container">
         <h1>Book a Schedule with <?php echo htmlspecialchars($company['name']); ?></h1>
-
+ <a href="../dashboard/dashboard.php" class="back-btn" style = "color:white !important;">Back to Dashboard</a>
         <?php if ($message): ?>
             <p class="message"><?php echo $message; ?></p>
         <?php endif; ?>
 
-        <form method="POST" id="bookingForm">
+        
             <h3>Available Schedules</h3>
             <p class="note">Note: You can only book a schedule 3 days or more in advance.</p>
             <?php while ($schedule = $schedules_result->fetch_assoc()): ?>
-                <div class="schedule-card">
-                    <div class="schedule-info">
-                        <p><strong>Date:</strong> <?php echo date('l, F j, Y', strtotime($schedule['date'])); ?></p>
-                        <p><strong>Time:</strong> <?php echo date('g:i A', strtotime($schedule['start_time'])) . ' - ' . date('g:i A', strtotime($schedule['end_time'])); ?></p>
-                    </div>
-                    <?php
-                    // Check if the schedule has been accepted by any user
-                    $check_sql = "SELECT * FROM bookings WHERE schedule_id = ? AND status = 'accept'";
-                    $stmt = $conn->prepare($check_sql);
-                    $stmt->bind_param("i", $schedule['id']);
-                    $stmt->execute();
-                    $check_result = $stmt->get_result();
+    <form method="POST" onsubmit="return confirm('Are you sure you want to book?');" class="schedule-card">
+        <div class="schedule-info">
+            <p><strong>Date:</strong> <?php echo date('l, F j, Y', strtotime($schedule['date'])); ?></p>
+            <p><strong>Time:</strong> <?php echo date('g:i A', strtotime($schedule['start_time'])) . ' - ' . date('g:i A', strtotime($schedule['end_time'])); ?></p>
+        </div>
+        <?php
+        $check_sql = "SELECT * FROM bookings WHERE schedule_id = ? AND status = 'accept'";
+        $stmt = $conn->prepare($check_sql);
+        $stmt->bind_param("i", $schedule['id']);
+        $stmt->execute();
+        $check_result = $stmt->get_result();
 
-                    $is_disabled = $check_result->num_rows > 0 || (strtotime($schedule['date']) - strtotime(date('Y-m-d'))) < 3 * 24 * 60 * 60;
-                    ?>
-                    <?php if ($is_disabled): ?>
-                        <button disabled>Book Now</button>
-                    <?php else: ?>
-                        <button type="button" onclick="confirmBooking(this)">
-                            Book Now
-                        </button>
-                        <input type="hidden" name="schedule_id" value="<?php echo $schedule['id']; ?>">
-                    <?php endif; ?>
-                </div>
-            <?php endwhile; ?>
-        </form>
+        $is_disabled = $check_result->num_rows > 0 || (strtotime($schedule['date']) - strtotime(date('Y-m-d'))) < 3 * 24 * 60 * 60;
+        ?>
+        <input type="hidden" name="schedule_id" value="<?php echo $schedule['id']; ?>">
+        <?php if ($is_disabled): ?>
+            <button type="submit" disabled>Book Now</button>
+        <?php else: ?>
+            <button type="submit">Book Now</button>
+        <?php endif; ?>
+    </form>
+<?php endwhile; ?>
 
+          <p class="note">Can't find a suitable schedule? Reach out to us via chat for assistance.</p>
+          <a href="../messaging/messaging.php" class="back-btn" style = "color:white !important;">Message Now!</a>
     </div>
-    <a href="../dashboard/dashboard.php" class="back-btn" style = "color:white !important;">Back to Dashboard</a>
+
 
 </body>
 </html>

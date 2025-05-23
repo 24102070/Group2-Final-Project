@@ -51,6 +51,80 @@ $cover_photo = !empty($company['cover_photo']) ? "../" . $company['cover_photo']
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/dashboard.css">
+    <style>
+  
+#sidebar {
+    background-color: rgba(230, 123, 123, 0.1);
+    color: #E67B7B !important;
+    padding: 20px;
+    border-radius: 35px;
+    min-height: 80%;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+#sidebar .sidebar-btn {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.3s ease, transform 0.2s;
+    cursor: pointer;
+}
+
+
+#sidebar .sidebar-btn.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+#sidebar .sidebar-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px);
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+    #sidebar {
+        flex: 0 0 60px !important; /* smaller width */
+        padding: 10px 5px;
+    }
+
+    #sidebar .sidebar-btn {
+        text-align: center;
+        padding: 10px 0;
+        font-size: 16px;
+    }
+
+    #sidebar .sidebar-btn i {
+        display: block;
+        font-size: 20px;
+    }
+
+    #sidebar .sidebar-btn::after,
+    #sidebar .sidebar-btn span,
+    #sidebar .sidebar-btn .text {
+        display: none !important; /* hide text */
+    }
+}
+
+
+        </style>
 </head>
 <body>
 
@@ -77,6 +151,37 @@ $cover_photo = !empty($company['cover_photo']) ? "../" . $company['cover_photo']
 </div>
 
 <hr>
+<div class="container" id="sidebar-content-wrapper" style="display: flex; gap: 20px; margin-top: 30px;">
+    
+   <nav id="sidebar" style="flex: 0 0 200px; border: 1px solid #ccc; padding: 15px; border-radius: 5px;">
+    <div style="text-align: center; margin-bottom: 20px;">
+    <img src="<?php echo $profile_photo; ?>" alt="Company Logo" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #E67B7B;">
+</div>
+<p style="color: #E67B7B; font-size: 14px; margin-top: 10px; text-align: center;"><i class="fa-regular fa-calendar"></i>
+    <?php echo date("l, F j"); ?>
+</p>
+<hr style="border-top: 1px solid #E67B7B; margin: 20px 0;">
+<p style="text-align: center; color: #E67B7B; font-size: 12px;">Quick Access</p>
+
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            <li><button class="sidebar-btn active" data-target="profile-section" style="width: 100%; padding: 10px; border: none; background: none; cursor: pointer; font-weight: 600; font-size: 20px; text-align: left; color: #E67B7B "> <i class="fa-solid fa-user"></i> <span class="text">Profile</button></li>
+            <li><button class="sidebar-btn" data-target="package-section" style="width: 100%; padding: 10px; border: none; background: none; cursor: pointer; font-weight: 600; font-size: 20px; text-align: left; color: #E67B7B "><i class="fa-solid fa-box-open"></i><span class="text"> Package</button></li>
+            <li><button class="sidebar-btn" data-target="post-section" style="width: 100%; padding: 10px; border: none; background: none; cursor: pointer; font-weight: 600; font-size: 20px;text-align: left; color: #E67B7B "> <i class="fa-solid fa-pen-to-square"></i><span class="text">Post</button></li>
+        </ul>
+<br>
+<br>
+        <hr style="border-top: 1px solid #E67B7B; margin: 20px 0;">
+        <blockquote style="font-style: italic; color: #E67B7B; font-size: 12px; margin: 20px 0;">
+    “Creativity is intelligence having fun.” – Albert Einstein
+</blockquote>
+
+    </nav>
+
+  <!-- START: Content Area -->
+    <div id="content-area" style="flex: 1; padding: 15px; border-radius: 5px; max-width: 100%; overflow-x: auto;">
+
+        <!-- START: Profile Content -->
+        <div id="profile-section" class="sidebar-content" style="display: block;">
 
 <!-- Cover Photo -->
 <div class="container">
@@ -98,9 +203,9 @@ $cover_photo = !empty($company['cover_photo']) ? "../" . $company['cover_photo']
         <p style="max-width: 80%; text-align: justify; margin: 0 auto;"><?php echo htmlspecialchars($company['about']); ?></p>
     </div>
 </div>
-
+</div>
 <!-- Packages Section -->
-<div class="container">
+ <div id="package-section" class="sidebar-content" style="display: none;">
     <h2 style="margin-top: 60px; font-family: 'Playfair Display', serif; color: #E67B7B;">Your Packages</h2>
     
     <div class="packages-container">
@@ -139,7 +244,7 @@ $cover_photo = !empty($company['cover_photo']) ? "../" . $company['cover_photo']
 </div>
 
 <!-- Posts Section -->
-<div class="container">
+ <div id="post-section" class="sidebar-content" style="display: none;">
     <h2 style="margin-top: 60px; font-family: 'Playfair Display', serif; color: #E67B7B;">Your Posts</h2>
     
     <div class="post-grid">
@@ -179,6 +284,8 @@ $cover_photo = !empty($company['cover_photo']) ? "../" . $company['cover_photo']
                 </div>
             <?php endwhile; ?>
         <?php endif; ?>
+    </div>
+</div>
     </div>
 </div>
 
@@ -276,7 +383,57 @@ window.onclick = function(event) {
         document.body.style.overflow = 'auto';
     }
 }
+
+document.querySelectorAll('.sidebar-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        document.querySelectorAll('.sidebar-btn').forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        button.classList.add('active');
+
+        // Hide all content divs
+        document.querySelectorAll('.sidebar-content').forEach(content => content.style.display = 'none');
+
+        // Show the targeted content div
+        const target = button.getAttribute('data-target');
+        const targetDiv = document.getElementById(target);
+        if (targetDiv) {
+            targetDiv.style.display = 'block';
+        }
+    });
+});
 </script>
 
+<button id="scrollToggleBtn" title="Scroll" style="position: fixed; bottom: 30px; right: 30px; background-color: #E67B7B; color: white; border: none; border-radius: 50%; padding: 15px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2); font-size: 18px; z-index: 999;">
+    <i class="fas fa-arrow-down"></i>
+</button>
+<script>
+    const scrollBtn = document.getElementById('scrollToggleBtn');
+    const targetHr = document.querySelector('hr'); // first <hr> element
+    let isAtBottom = false;
+
+    scrollBtn.addEventListener('click', () => {
+        if (!isAtBottom) {
+            // Scroll down to <hr>
+            targetHr.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+            // Scroll up to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle state after a short delay to allow scroll to complete
+        setTimeout(() => {
+            isAtBottom = !isAtBottom;
+            scrollBtn.innerHTML = isAtBottom
+                ? '<i class="fa-solid fa-arrow-up"></i>'
+                : '<i class="fa-solid fa-arrow-down"></i>';
+        }, 500);
+    });
+</script>
+
+
+</body>
+</html> 
+</script>
 </body>
 </html>

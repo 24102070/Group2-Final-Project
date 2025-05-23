@@ -538,6 +538,10 @@ $cover_photo = !empty($company['cover_photo']) ? "../" . $company['cover_photo']
 </head>
 <body>
 <div class="main-container">
+    <!-- Back Button -->
+    <a href="companies.php" class="back-btn fade-in" style="animation-delay: 0.8s;">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+    </a>
     <!-- Cover Photo Section -->
     <div class="cover-wrapper">
         <img src="<?php echo $cover_photo; ?>" class="cover-photo" alt="Company Cover Photo">
@@ -752,10 +756,7 @@ $cover_photo = !empty($company['cover_photo']) ? "../" . $company['cover_photo']
         <?php endif; ?>
     </div>
     
-    <!-- Back Button -->
-    <a href="companies.php" class="back-btn fade-in" style="animation-delay: 0.8s;">
-        <i class="fas fa-arrow-left"></i> Back to Dashboard
-    </a>
+    
 </div>
 
 <script>

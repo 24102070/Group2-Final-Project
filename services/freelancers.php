@@ -423,7 +423,9 @@ $result = $conn->query($sql);
 
     <div class="overlay-container">
         <h1>Available Freelancers</h1>
-
+         <a href="../dashboard/dashboard.php" class="back-btn">
+            Back to Dashboard
+        </a>
         <!-- Search Bar and Filter Dropdown -->
         <div class="search-container">
             <input type="text" id="searchBar" class="search-bar" placeholder="Search by name or profession...">
@@ -471,9 +473,7 @@ $result = $conn->query($sql);
             <?php endif; ?>
         </div>
 
-        <a href="../dashboard/dashboard.php" class="back-btn">
-            Back to Dashboard
-        </a>
+       
     </div>
 
     <script>

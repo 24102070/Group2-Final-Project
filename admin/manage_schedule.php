@@ -255,7 +255,7 @@ if (isset($_SESSION['message'])) {
              
                         <form method="POST" style="display:inline;">
                             <input type="hidden" name="delete" value="<?= $schedule['id'] ?>">
-                            <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure?')">Delete</button>
+                            <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure?')">Remove</button>
                         </form>
 
                        

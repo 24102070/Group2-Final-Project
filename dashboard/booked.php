@@ -15,20 +15,38 @@ $user_id = $_SESSION['user_id'];
 // Process cancellation request for company appointments
 if (isset($_GET['cancel_id'])) {
     $cancel_id = $_GET['cancel_id'];
+
+    // First, try canceling company appointment
     $sql = "SELECT s.date FROM bookings b JOIN company_schedules s ON b.schedule_id = s.id WHERE b.id = ? AND b.user_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $cancel_id, $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
+
+    $is_company = false;
+    if ($result->num_rows > 0) {
+        $is_company = true;
+    } else {
+        // If not found, try looking in freelancer_bookings
+        $sql = "SELECT s.date FROM freelancer_bookings b JOIN freelancer_schedules s ON b.schedule_id = s.id WHERE b.id = ? AND b.user_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $cancel_id, $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    }
+
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $schedule_date = strtotime($row['date']);
         $current_date = time();
-        $days_left = ($schedule_date - $current_date) / (60 * 60 * 24); // Days left for the appointment
+        $days_left = ($schedule_date - $current_date) / (60 * 60 * 24);
 
         if ($days_left >= 3) {
-            // Cancel the appointment
-            $cancel_sql = "UPDATE bookings SET status = 'cancelled' WHERE id = ?";
+            if ($is_company) {
+                $cancel_sql = "UPDATE bookings SET status = 'cancelled' WHERE id = ?";
+            } else {
+                $cancel_sql = "UPDATE freelancer_bookings SET status = 'cancelled' WHERE id = ?";
+            }
             $cancel_stmt = $conn->prepare($cancel_sql);
             $cancel_stmt->bind_param("i", $cancel_id);
             if ($cancel_stmt->execute()) {
@@ -43,6 +61,7 @@ if (isset($_GET['cancel_id'])) {
         $message = "Appointment not found.";
     }
 }
+
 
 // Fetch user's booked appointments from the bookings table (companies)
 $sql = "
