@@ -30,8 +30,8 @@ if (count($users) == 0) {
                      onclick="openChatWindow(this)">
                     <div class="profile-picture" style="background-image: url(\'' . $photo . '\');"></div>
                     <div class="message-content">
-                        <div class="username">' . htmlspecialchars($user['NAME']) . '<div class="on-status"></div></div>
-                        <div class="message">this is a test<span class="timestamp">3:00 AM</span></div>
+                        <div class="username">' . htmlspecialchars($user['NAME']) . '</div>
+                        <div class="message"></div>
                     </div>
                 </div>
             ';

@@ -12,21 +12,11 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 include '../config/db.php';
-$user_id = $_SESSION['user_id'];
-$user_name = empty($user_name) ? 'You' : $user_name;
-
-
-$sql = "SELECT NAME FROM users WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$stmt->bind_result($user_name);
-$stmt->fetch();
-$stmt->close();
 $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
 $recipient_id = isset($_GET['recipient_id']) ? $_GET['recipient_id'] : null;
 $recipient_name = isset($_GET['name']) ? $_GET['name'] : null;
 $recipient_type = isset($_GET['type']) ? $_GET['type'] : null;
+
 
 
 if (!empty($searchTerm)) {
@@ -47,25 +37,24 @@ if (!empty($searchTerm)) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    echo "<h2>Search Results for: <em>" . htmlspecialchars($searchTerm) . "</em></h2>";
+    // echo "<h2>Search Results for: <em>" . htmlspecialchars($searchTerm) . "</em></h2>";
 
-    if ($result->num_rows > 0) {
-        echo "<ul>";
-        while ($row = $result->fetch_assoc()) {
-            echo "<li class='search-result' data-id='" . $row['id'] . "' data-name='" . htmlspecialchars($row['name'])
-            . "' data-type='" . $row['type'] . "' data-user-type='" . $row['user_type'] . "' onclick='openChatWindow(this)'>
-            <strong>" . htmlspecialchars($row['name']) . "</strong> (" . $row['type'] . ")
-            </li>";
-        }
-        echo "</ul>";
-    } else {
-        echo "No results found.";
-    }
-
+    // if ($result->num_rows > 0) {
+    //     echo "<ul>";
+    //     while ($row = $result->fetch_assoc()) {
+    //         echo "<li class='search-result' data-id='" . $row['id'] . "' data-name='" . htmlspecialchars($row['name'])
+    //         . "' data-type='" . $row['type'] . "' data-user-type='" . $row['user_type'] . "' onclick='openChatWindow(this)'>
+    //         <strong>" . htmlspecialchars($row['name']) . "</strong> (" . $row['type'] . ")
+    //         </li>";
+    //     }
+    //     echo "</ul>";
+    // } else {
+    //     echo "No results found.";
+    // }
+    echo $recipient_name;
     $stmt->close();
 }
 
-$conn->close();
 ?>
 
 
@@ -80,6 +69,18 @@ $conn->close();
     <link rel="stylesheet" href="menubarcss.css">
     <link rel="stylesheet" href="messagescss.css">
     <link rel="stylesheet" href="mainchatcss.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+        .toggle-section{
+            margin-top: 10px;
+            padding:3px;
+            border: .5px solid black;
+            border-radius:10px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <div class="chat-container">
@@ -93,11 +94,16 @@ $conn->close();
                   <span></span>
                 </div>
                 <div class="dropdown-menu">
+                    <div class="dropdown-item">Dash Board</div>
+                    <div class="dropdown-item">Settings</div>
                     <div class="dropdown-item"><a href="../auth/logout.php">Logout</a></div>
                 </div>
             </label>
+            <!-- <button class="roles"><span>Users</span></button>
+            <button class="roles"><span>Freelancers</span></button>
+            <button class="roles"><span>Companies</span></button> -->
             <div class="profile-pic">
-                <img src="ian_profile.jfif" class="profile">
+                <img src="pfp.jfif" class="profile">
             </div>
         </div>
         <!-- Sidebar -->
@@ -121,25 +127,25 @@ $conn->close();
                 <div class="users-chats">
 
                 </div>
+                <button class="toggle-section" id="toggle-users" onclick="toggleSection('users')">Show More</button>
             </div>
-            
 
             <div class="separator"></div>
             <div class="direct-messages">
                 <div class="freelancers-area">
-                        <form class="form">
-                            <button>
-                                <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
-                                    <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </button>
-                            <input class="input" placeholder="Freelancers" required="" type="text" name="searchFreelancer" id="searchFreelancer">
-                            <button class="reset" type="reset">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                                </svg>
-                            </button>
-                        </form>
+                    <form class="form">
+                        <button>
+                            <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+                                <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                        <input class="input" placeholder="Freelancers" required="" type="text" name="searchFreelancer" id="searchFreelancer">
+                        <button class="reset" type="reset">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </form>
                     <div class="freelancer-chats">
                         <!-- <div class="conversation-card" onclick="">
                              <div class="profile-picture" style="background-image: url('ian_profile.jfif');"></div>
@@ -151,6 +157,7 @@ $conn->close();
                             </div>
                         </div> -->
                     </div>
+                    <button class="toggle-section" id="toggle-freelancers" onclick="toggleSection('freelancers')">Show More</button>
                 </div>
             </div>
             <div class="separator"></div>
@@ -197,17 +204,43 @@ $conn->close();
                         </div>
                     </div> -->
                 </div>
+                <button class="toggle-section" id="toggle-companies" onclick="toggleSection('companies')">Show More</button>
             </div>
         </div>
         <!-- Main Chat Section -->
+        <?php
+            $recipient_id = $_GET['recipient_id'] ?? null;
+            $recipient = null;
+
+            if ($recipient_id) {
+                $stmt = $conn->prepare("SELECT name, profile_photo FROM users WHERE id = ?");
+                $stmt->bind_param("i", $recipient_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $recipient = $result->fetch_assoc();
+                $stmt->close();
+            }
+
+            $recipient_name = $recipient['name'] ?? null;
+            $recipient_photo = (!empty($recipient['profile_photo']))
+                ? '../' . $recipient['profile_photo']
+                : 'https://ui-avatars.com/api/?name=' . urlencode($recipient_name ?? 'User');
+        ?>
         <div class="main-chat">
             <div class="chats-top-container">
                 <div class="chat-card">
-                    <div class="profile-picture" style="background-image: url('ianprof.png');"></div>
-                    <div class="chat-content">
-                        <div class="username"><u>You</u><div class="on-status"></div></div>
-                        <div class="status">Online</div>
-                    </div>
+                    <div class="profile-picture" id="profilePicture" style="background-image: url('<?php echo htmlspecialchars($recipient_photo); ?>');"></div>
+                        <div class="chat-content">
+                            <div class="username"><u>
+                                <?php 
+                                    if ($recipient_name) {
+                                        echo htmlspecialchars($recipient_name);
+                                    } else {
+                                        echo "Select a recipient";
+                                    }
+                                ?>
+                            </u></div>
+                        </div>
                     <div class="container-icons">
                         <!--Voice Call-->
                         <button class="voice_call" id="voice_call">
@@ -271,105 +304,222 @@ $conn->close();
     <script src="userjs/usersFreelancers.js" defer></script>
     <script src="userjs/usersCompanies.js" defer></script>
     <script src="userjs/search.js" defer></script>
-<script>
-    let currentRecipientId = null;
-    let currentRecipientType = null;
-    const currentUserId = <?php echo $_SESSION['user_id']; ?>;
-    const currentUserType = '<?php echo $_SESSION['role']; ?>';
 
-    function openChatWindow(element) {
-        // Get data attributes from the clicked result
-        const recipientId = element.getAttribute('data-id');
-        console.log (recipientId);
-        const recipientName = element.getAttribute('data-name');
-        console.log(recipientName);
-        const recipientType = element.getAttribute('data-type');
-        console.log(recipientType);
-        const recipientUserType = element.getAttribute('data-user-type');
+    <script>
+        let currentRecipientId = null;
+        let currentRecipientType = null;
+        const currentUserId = <?php echo $_SESSION['user_id']; ?>;
+        const currentUserType = '<?php echo $_SESSION['role']; ?>';
 
-        // Store the selected recipient ID and type
-        currentRecipientId = recipientId;
-        currentRecipientType = recipientUserType;
+        function openChatWindow(element) {
+            // Get data attributes from the clicked result
+            const recipientId = element.getAttribute('data-id');
+            console.log (recipientId);
+            const recipientName = element.getAttribute('data-name');
+            console.log(recipientName);
+            const recipientType = element.getAttribute('data-type');
+            console.log(recipientType);
+            const recipientUserType = element.getAttribute('data-user-type');
 
-        // Update the chat interface with the recipient's information
-        const displayArea = document.getElementById('displaymessage');
-        displayArea.innerHTML = `
-            <div class="o-u-info">
-                <div class="profile-picture-display-message" style="background-image: url('default_profile.png');"></div>
-                <div class="username">${recipientName}</div>
-                <div class="email"><u>${recipientType} (${recipientUserType})</u></div>
-            </div>
-            <div class="line"></div>
-            <p class="time">Now</p>
-            <div class="message-other-message">Start chatting with ${recipientName}!</div>
-        `;
+            // Store the selected recipient ID and type
+            currentRecipientId = recipientId;
+            currentRecipientType = recipientUserType;
 
-        // Optional: Scroll to top or bring chat window into view
-        displayArea.scrollIntoView({ behavior: 'smooth' });
+            // Update the chat header with recipient's name and profile picture
+            document.querySelector('.chat-content .username u').textContent = recipientName;
+            document.querySelector('.chat-card .profile-picture').style.backgroundImage = "url('default_profile.png')";
 
-        console.log(`Selected recipient ID: ${currentRecipientId}, Type: ${currentRecipientType}`);
+            // Update the chat interface with the recipient's information
+            const displayArea = document.getElementById('displaymessage');
+            displayArea.innerHTML = `
+                <div class="o-u-info">
+                    <div class="profile-picture-display-message" style="background-image: url('default_profile.png');"></div>
+                    <div class="username">${recipientName}</div>
+                    <div class="email"><u>${recipientType} (${recipientUserType})</u></div>
+                </div>
+                <div class="line"></div>
+                <div class="messages-container">
+                    <p class="time">Now</p>
+                    <div class="message-other-message">Start chatting with ${recipientName}!</div>
+                </div>
+            `;
 
-        // Load previous messages
-        fetch(`load_messages.php?user_id=${currentUserId}&user_type=${currentUserType}&recipient_id=${recipientId}&recipient_type=${recipientUserType}`)
-        .then(response => response.json())
-        .then(messages => {
-            displayArea.innerHTML = ''; // Clear previous messages
-            messages.forEach(message => {
-                // Check both ID and type to determine if message is from current user
-                const isCurrentUser = message.user_id === currentUserId && message.user_type === currentUserType;
-                const messageClass = isCurrentUser ? 'message-user-message' : 'message-other-message';
-                displayArea.innerHTML += `
-                    <div class="${messageClass}">${message.text_input}</div>
-                    <p class="time">${new Date(message.sent_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-                `;
-            });
-        })
-        .catch(error => console.error('Error loading messages:', error));
-    }
+            // Optional: Scroll to top or bring chat window into view
+            displayArea.scrollIntoView({ behavior: 'smooth' });
 
-    // Send message handler
-    document.getElementById('messageInput').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter' && this.value.trim() !== '') {
-            e.preventDefault();
+            console.log(`Selected recipient ID: ${currentRecipientId}, Type: ${currentRecipientType}`);
 
-            const messageText = this.value.trim();
-            const messageContainer = document.getElementById('displaymessage');
+            // Load previous messages
+            fetch(`load_messages.php?user_id=${currentUserId}&user_type=${currentUserType}&recipient_id=${recipientId}&recipient_type=${recipientUserType}`)
+            .then(response => response.json())
+            .then(messages => {
+                displayArea.innerHTML = ''; // Clear previous messages
+                messages.forEach(message => {
+                    // Check both ID and type to determine if message is from current user
+                    const isCurrentUser = message.user_id === currentUserId && message.user_type === currentUserType;
+                    const messageClass = isCurrentUser ? 'message-user-message' : 'message-other-message';
+                    displayArea.innerHTML += `
+                        <div class="${messageClass}">${message.text_input}</div>
+                        <p class="time">${new Date(message.sent_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                    `;
+                });
+            })
+            .catch(error => console.error('Error loading messages:', error));
+        }
 
-            if (!currentRecipientId || !currentRecipientType) {
-                alert("Please select a recipient first.");
-                return;
+        // Send message handler
+        document.getElementById('messageInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' && this.value.trim() !== '') {
+                e.preventDefault();
+
+                const messageText = this.value.trim();
+                const messageContainer = document.getElementById('displaymessage');
+
+                if (!currentRecipientId || !currentRecipientType) {
+                    alert("Please select a recipient first.");
+                    return;
+                }
+
+                // Save message to the database
+                fetch('save_message.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: currentUserId,
+                        user_type: currentUserType,
+                        recipient_id: currentRecipientId,
+                        recipient_type: currentRecipientType,
+                        text_input: messageText
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        messageContainer.innerHTML += `
+                            <div class="message-user-message">${messageText}</div>
+                            <p class="time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                        `;
+                        this.value = '';
+                    } else {
+                        alert("Error saving message: " + (data.error || "Unknown error"));
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        });
+    </script>
+
+    <script defer>
+        const CARDS_TO_SHOW = 2; // Number of cards to show initially
+
+        function toggleSection(section) {
+            let cardsContainer;
+            let toggleButton;
+            
+            switch(section) {
+                case 'users':
+                    cardsContainer = document.querySelector(".users-chats");
+                    toggleButton = document.getElementById("toggle-users");
+                    break;
+                case 'freelancers':
+                    cardsContainer = document.querySelector(".freelancer-chats");
+                    toggleButton = document.getElementById("toggle-freelancers");
+                    break;
+                case 'companies':
+                    cardsContainer = document.querySelector(".cards_messages_container");
+                    toggleButton = document.getElementById("toggle-companies");
+                    break;
             }
 
-            // Save message to the database
-            fetch('save_message.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    user_id: currentUserId,
-                    user_type: currentUserType,
-                    recipient_id: currentRecipientId,
-                    recipient_type: currentRecipientType,
-                    text_input: messageText
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    messageContainer.innerHTML += `
-                        <div class="message-user-message">${messageText}</div>
-                        <p class="time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-                    `;
-                    this.value = '';
+            if (!cardsContainer || !toggleButton) return;
+
+            const cards = cardsContainer.querySelectorAll(".conversation-card");
+            const currentState = localStorage.getItem(`${section}ToggleState`) || 'collapsed';
+            const newState = currentState === 'collapsed' ? 'expanded' : 'collapsed';
+
+            cards.forEach((card, index) => {
+                if (newState === 'collapsed' && index >= CARDS_TO_SHOW) {
+                    card.classList.add('hidden');
                 } else {
-                    alert("Error saving message: " + (data.error || "Unknown error"));
+                    card.classList.remove('hidden');
                 }
-            })
-            .catch(error => console.error('Error:', error));
+            });
+
+            // Only show the toggle button if there are more than CARDS_TO_SHOW cards
+            if (cards.length > CARDS_TO_SHOW) {
+                toggleButton.style.display = 'block';
+                toggleButton.innerText = newState === 'collapsed' ? "Show More" : "Show Less";
+            } else {
+                toggleButton.style.display = 'none';
+            }
+
+            localStorage.setItem(`${section}ToggleState`, newState);
         }
-    });
-</script>
+
+        function applySavedState(section) {
+            let cardsContainer;
+            let toggleButton;
+            
+            switch(section) {
+                case 'users':
+                    cardsContainer = document.querySelector(".users-chats");
+                    toggleButton = document.getElementById("toggle-users");
+                    break;
+                case 'freelancers':
+                    cardsContainer = document.querySelector(".freelancer-chats");
+                    toggleButton = document.getElementById("toggle-freelancers");
+                    break;
+                case 'companies':
+                    cardsContainer = document.querySelector(".cards_messages_container");
+                    toggleButton = document.getElementById("toggle-companies");
+                    break;
+            }
+
+            if (!cardsContainer || !toggleButton) return;
+
+            const cards = cardsContainer.querySelectorAll(".conversation-card");
+            const currentState = localStorage.getItem(`${section}ToggleState`) || 'collapsed';
+
+            cards.forEach((card, index) => {
+                if (currentState === 'collapsed' && index >= CARDS_TO_SHOW) {
+                    card.classList.add('hidden');
+                } else {
+                    card.classList.remove('hidden');
+                }
+            });
+
+            // Only show the toggle button if there are more than CARDS_TO_SHOW cards
+            if (cards.length > CARDS_TO_SHOW) {
+                toggleButton.style.display = 'block';
+                toggleButton.innerText = currentState === 'collapsed' ? "Show More" : "Show Less";
+            } else {
+                toggleButton.style.display = 'none';
+            }
+        }
+
+        // Initialize toggle states on page load and after dynamic content updates
+        function initializeToggles() {
+            ['users', 'freelancers', 'companies'].forEach(section => {
+                applySavedState(section);
+            });
+        }
+
+        // Call initialization on page load
+        document.addEventListener('DOMContentLoaded', initializeToggles);
+
+        // Add observer to handle dynamically loaded content
+        const config = { childList: true, subtree: true };
+        const observer = new MutationObserver(initializeToggles);
+        
+        ['users-chats', 'freelancer-chats', 'cards_messages_container'].forEach(className => {
+            const container = document.querySelector(`.${className}`);
+            if (container) {
+                observer.observe(container, config);
+            }
+        });
+    </script>
 
 </body>
 </html>

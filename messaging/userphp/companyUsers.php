@@ -30,8 +30,8 @@ if (count($company_profiles) == 0) {
                      data-type="Company" data-user-type="company" onclick="openChatWindow(this)">
                     <div class="profile-picture" style="background-image: url(\'../' . $photo . '\');"></div>
                     <div class="message-content">
-                        <div class="username">' . $company['name'] . '<div class="on-status"></div></div>
-                        <div class="message">this is a test<span class="timestamp">3:00 AM</span></div>
+                        <div class="username">' . $company['name'] . '</div>
+                        <div class="message"></div>
                     </div>
                 </div>
             ';

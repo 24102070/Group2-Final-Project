@@ -36,8 +36,8 @@ if (count($freelancers) == 0) {
                 data-type="Freelancer"data-user-type="freelancer"onclick="openChatWindow(this)">
                     <div class="profile-picture" style="background-image: url(\'' . $photo . '\');"></div>
                     <div class="message-content">
-                        <div class="username">' . htmlspecialchars($freelancer['name']) . '<div class="on-status"></div></div>
-                        <div class="message">this is a test<span class="timestamp">3:00 AM</span></div>
+                        <div class="username">' . htmlspecialchars($freelancer['name']) . '</div>
+                        <div class="message"></div>
                     </div>
                 </div>
             ';

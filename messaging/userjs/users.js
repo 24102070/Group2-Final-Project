@@ -12,4 +12,5 @@ setInterval(() => {
     .catch((error) => {
       console.error("Fetch error: ", error);
     });
+    
 }, 500);

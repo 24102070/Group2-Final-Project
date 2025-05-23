@@ -79,6 +79,12 @@
   height: 100%;
   overflow-y: auto;
 }
+.result {
+  display: none;
+}
+.result.visible {
+  display: block;
+}
 .message-user-message {
   border: 2px solid #0aa32e;
   background-color: #3cd760a1;
